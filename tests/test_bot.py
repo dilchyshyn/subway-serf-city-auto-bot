@@ -79,6 +79,17 @@ class SceneTest(unittest.TestCase):
         self.assertFalse(far.lanes[2].stomp)
         self.assertGreater(far.lanes[2].value, 0)  # але в смугу з нею варто перейти
 
+    def test_player_lane(self):
+        s = self.scene([box_at(self.geo, "player", 2, 0.80, 0.08, 0.12)])
+        self.assertEqual(s.player_lane, 2)
+        self.assertTrue(all(l.value == 0 and l.near is None for l in s.lanes))
+        b = Brain(self.cfg, lane=1)
+        b.sync_lane(s.player_lane, now=0)
+        self.assertEqual(b.lane, 2)
+        b.decide(sc(st(), st(), st(TALL)), now=0)  # почав рух вліво
+        b.sync_lane(2, now=0.1)                     # кадр ще показує стару смугу — ігноруємо
+        self.assertEqual(b.lane, 1)
+
     def test_off_road_pickup_ignored(self):
         s = self.scene([Detection("coin", 0.9, 0, 0.6 * H, 10, 0.6 * H + 10)])
         self.assertTrue(all(l.value == 0 for l in s.lanes))

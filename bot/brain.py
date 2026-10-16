@@ -36,6 +36,11 @@ class Brain:
         self.lane = target
         return action
 
+    def sync_lane(self, lane, now):
+        """Уточнити смугу за детекцією персонажа (не посеред руху між смугами)."""
+        if lane is not None and now >= self._busy_until:
+            self.lane = lane
+
     def emergency(self, scene, now):
         """Лише стрибок/пірнання перед перешкодою, без зміни смуги (для режиму маршруту)."""
         cur = scene.lanes[self.lane]

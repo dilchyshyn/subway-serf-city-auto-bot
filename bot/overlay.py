@@ -5,7 +5,7 @@ COLORS = {
     "obstacle_tall": (0, 0, 255), "obstacle_low": (0, 128, 255), "obstacle_high": (0, 255, 255),
     "coin": (0, 215, 255), "board_coin": (180, 180, 255), "energy": (255, 160, 0),
     "powerup": (255, 0, 255), "star": (255, 255, 255), "stomp_target": (0, 255, 0),
-    "board_ready": (255, 255, 0),
+    "board_ready": (255, 255, 0), "player": (255, 128, 0),
 }
 
 

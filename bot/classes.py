@@ -11,6 +11,7 @@ CLASSES = [
     "star",           # Secret Star
     "stomp_target",   # об'єкт, на який стрибають і б'ють stomp, щоб випали монети
     "board_ready",    # HUD: шкала ховерборда повна, можна тапнути
+    "player",         # сам персонаж: для визначення смуги й маршрутів з відео
 ]
 
 TALL, LOW, HIGH = "tall", "low", "high"
