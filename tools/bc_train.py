@@ -62,6 +62,8 @@ def main():
     p.add_argument("--val-videos", type=int, default=5)
     p.add_argument("--out", default=str(ROOT / "models" / "policy.pt"))
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--none-keep", type=float, default=0.25,
+                   help="частка кадрів «нічого не робити» в навчанні (їх ~87%%, решта лише сповільнює)")
     args = p.parse_args()
 
     random.seed(args.seed)
@@ -70,6 +72,8 @@ def main():
     random.shuffle(files)
     val_files, train_files = files[: args.val_videos], files[args.val_videos:]
     x, px, y, _ = load(train_files)
+    keep = (y > 0) | (np.random.rand(len(y)) < args.none_keep)
+    x, px, y = x[keep], px[keep], y[keep]
     vx, vpx, vy, vruns = load(val_files)
     print(f"навчання: {len(y)} кадрів з {len(train_files)} відео; перевірка: {len(vy)} кадрів з {len(val_files)} відео")
     counts = np.bincount(y, minlength=len(ACTIONS))

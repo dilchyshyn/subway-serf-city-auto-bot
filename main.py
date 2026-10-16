@@ -5,7 +5,8 @@
   python main.py --show --dry-run                # лише дивитися рішення, без свайпів
   python main.py --vision heuristic --show       # без моделі, на кольорових евристиках
   python main.py --backend screenrecord --show   # захоплення без v4l2loopback
-  python main.py --tour                          # рівень City Tour: бот упізнає його за карткою
+  python main.py --brain policy                  # грати моделлю, навченою на відео (будь-який рівень)
+  python main.py --tour --brain policy           # тур: маршрут, а якщо рівня немає — модель
   python main.py --route routes/docks_07.json    # пройти рівень City Tour за конкретним маршрутом
   python main.py --dry-run --record rec/ --vision heuristic   # записувати кадри, поки граєш сам
 
@@ -40,6 +41,9 @@ def parse_args():
     p.add_argument("--image", help="картинка або папка (для --backend image)")
     p.add_argument("--serial", help="серійний номер телефону, якщо підключено кілька")
     p.add_argument("--vision", choices=["yolo", "heuristic"], help="чим розпізнавати об'єкти")
+    p.add_argument("--brain", choices=["rules", "policy"], default="rules",
+                   help="rules — правила над детектором; policy — модель, навчена на відео (models/policy.pt)")
+    p.add_argument("--policy-threshold", type=float, default=0.5, help="поріг упевненості моделі")
     p.add_argument("--model", help="шлях до YOLO-моделі (.pt або експортованої)")
     p.add_argument("--tour", action="store_true",
                    help="відкрита картка рівня City Tour: упізнати рівень, натиснути PLAY і пройти за маршрутом")
@@ -136,7 +140,13 @@ def main():
     # маршрут з відео стартує за появою HUD на екрані — для цього потрібні кадри
     need_capture = need_vision or args.diag or (args.route and start_mode == "hud")
 
-    detector = make_detector(args.vision or cfg["vision"]["backend"], cfg, geo, args.model) if need_vision else None
+    policy = None
+    if args.brain == "policy" and (not args.route or args.route_guard):
+        from bot.policy import Policy
+        policy = Policy(ROOT / "models" / "policy.pt", threshold=args.policy_threshold)
+        print("Мізки: модель, навчена на відео проходжень (models/policy.pt)")
+    detector = (make_detector(args.vision or cfg["vision"]["backend"], cfg, geo, args.model)
+                if need_vision and policy is None else None)
     if cap is None and need_capture:
         cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image)
     ctl = DryRunController() if args.dry_run else AdbController(cfg, args.serial)
@@ -214,6 +224,23 @@ def main():
                 time.sleep(0.002)
                 continue
             h, w = frame.shape[:2]
+            if policy is not None:
+                action = None
+                if not paused and (not args.route or (player and player.next_in(now) > cfg["action_cooldown"])):
+                    action, _ = policy.decide(frame, now)
+                if action:
+                    ctl.act(action)
+                    diag_event(f"policy {action}")
+                    last_action = action
+                    print(f"{action:>6}  (модель)")
+                if args.show:
+                    vis = frame.copy()
+                    cv2.putText(vis, (last_action or "").upper(), (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 255), 4)
+                    cv2.imshow("subway bot", cv2.resize(vis, None, fx=720 / vis.shape[0], fy=720 / vis.shape[0]))
+                    if cv2.waitKey(1) & 0xFF == ord("q"):
+                        break
+                frames += 1
+                continue
             scene = build_scene(detector.detect(frame), w, h, geo, cfg)
 
             action = None
