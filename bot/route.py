@@ -174,7 +174,7 @@ def _swipe(action, t, swipe_cfg):
 
 
 def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, roll_shrink=0.7,
-                       snap=0.3):
+                       snap=0.3, lanes=True, stomp_max_air=None, jumps_log=None):
     """Відновлює свайпи з траєкторії персонажа у відео.
 
     track — список (t, (x1, y1, x2, y2) у частках кадру або None, якщо персонажа не видно).
@@ -182,6 +182,11 @@ def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, ro
     до центру нової смуги (гістерезис: проміжні положення під час руху не рахуються);
     стрибок — низ рамки різко піднявся; пірнання — рамка стала нижчою.
     lead віднімається від моменту, коли рух помітно на кадрі: свайп був трохи раніше.
+    lanes=False — лише стрибки й пірнання (у City смуги надійніше визначати за
+    зсувом рейок, див. bot/video.py, бо камера йде за персонажем вбік).
+    stomp_max_air — якщо персонаж приземлився швидше за стільки секунд після
+    стрибка, це був stomp (свайп униз у повітрі): додаємо "roll" перед падінням.
+    jumps_log — список, куди дописуються (старт, приземлення) кожного стрибка.
     """
     seen = [(t, b) for t, b in track if b is not None]
     if len(seen) < stable + 1:
@@ -197,11 +202,12 @@ def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, ro
     cand_len = 0
     move_start = None   # коли персонаж почав зсуватися зі смуги
     in_air = rolling = False
+    jump_t = None
     hist = []  # (t, bottom, height) за останню секунду
 
     for t, cx, bottom, height in zip(ts, cxs, bottoms, heights):
         # --- смуга ---
-        pos = pos_of(cx)
+        pos = pos_of(cx) if lanes else 0.0
         near = int(round(pos))
         if lane is not None and abs(pos - lane) > snap and move_start is None:
             move_start = t
@@ -226,9 +232,13 @@ def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, ro
             recent = [hb for ht, hb, _ in hist if t - ht <= 0.25]
             if not in_air and recent and max(recent) - bottom > jump_rise:
                 out.append(_swipe("jump", t - lead - 0.1, swipe_cfg))
-                in_air = True
+                in_air, jump_t = True, t
             elif in_air and ground - bottom < jump_rise / 2:
                 in_air = False
+                if jumps_log is not None:
+                    jumps_log.append((jump_t, t))
+                if stomp_max_air and t - jump_t < stomp_max_air:
+                    out.append(_swipe("roll", t - lead - 0.15, swipe_cfg))
             if not in_air and not rolling and height < roll_shrink * usual_h:
                 out.append(_swipe("roll", t - lead, swipe_cfg))
                 rolling = True
