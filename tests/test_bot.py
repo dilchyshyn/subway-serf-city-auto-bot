@@ -313,9 +313,10 @@ PILOT_BURSTS = [(10.53, -196), (11.87, 176), (13.20, 7), (15.20, -199), (16.73, 
 class VideoTest(unittest.TestCase):
     def test_segment_runs(self):
         from bot.video import segment_runs
-        times = [i * 0.5 for i in range(60)]
-        flags = [3 <= t < 12 or 14 <= t < 16 or 18 <= t < 28 and t != 20 for t in times]
-        self.assertEqual(segment_runs(times, flags), [(3.0, 11.5), (18.0, 27.5)])
+        times = [i * 0.5 for i in range(120)]
+        # рівень 1 з 2-секундною діркою (HUD під ефектом), короткий шматок меню, рівень 2
+        flags = [3 <= t < 12 or 14 <= t < 20 or 30 <= t < 32 or 40 <= t < 55 for t in times]
+        self.assertEqual(segment_runs(times, flags), [(3.0, 19.5), (40.0, 54.5)])
 
     def test_lane_events_on_pilot(self):
         from bot.video import lane_events
@@ -332,7 +333,11 @@ class VideoTest(unittest.TestCase):
         from bot.video import hud_visible
         img = np.full((640, 288, 3), (40, 90, 200), np.uint8)
         self.assertFalse(hud_visible(img))
-        cv2.rectangle(img, (int(0.03 * 288), int(0.015 * 640)), (int(0.05 * 288), int(0.04 * 640)), (0, 210, 255), -1)
+        x, y, s = int(0.03 * 288), int(0.05 * 640), 30             # кнопка паузи, зсунута вниз
+        cv2.rectangle(img, (x, y), (x + s, y + s), (0, 210, 255), -1)
+        self.assertFalse(hud_visible(img))                         # жовтий квадрат без смужок — не пауза
+        cv2.rectangle(img, (x + 8, y + 6), (x + 12, y + s - 6), (20, 20, 20), -1)
+        cv2.rectangle(img, (x + 18, y + 6), (x + 22, y + s - 6), (20, 20, 20), -1)
         self.assertTrue(hud_visible(img))
 
 

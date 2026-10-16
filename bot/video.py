@@ -1,7 +1,7 @@
 """Аналіз відео проходжень Subway Surfers City без нейромережі.
 
-* hud_visible — чи йде забіг: жовта кнопка паузи в лівому верхньому куті
-  є лише під час забігу (у меню, на картці рівня й екрані результатів її немає).
+* hud_visible — чи йде забіг: жовта кнопка паузи з двома смужками в лівому
+  верхньому куті є лише під час забігу (у меню, на картці рівня й екрані результатів її немає).
   Той самий тест бот застосовує до свого екрана, щоб синхронізувати маршрут.
 * segment_runs — межі забігів (рівнів) у відео за HUD.
 * rail_profile / profile_shift / lane_events — зміни смуги. Камера йде за
@@ -12,22 +12,38 @@
 import cv2
 import numpy as np
 
-# зона кнопки паузи, частки кадру (x0, x1, y0, y1)
-PAUSE_ROI = (0.02, 0.09, 0.012, 0.055)
+# де шукати кнопку паузи: лівий верхній кут, частки кадру (x1, y1).
+# Відступ зверху буває різним (статус-бар, обрізка запису), тож зона з запасом.
+PAUSE_SEARCH = (0.15, 0.13)
 RAIL_BAND = (0.80, 0.97)
 
 
-def hud_visible(frame, min_yellow=0.05, max_dark=0.04):
+def hud_visible(frame):
+    """Чи видно кнопку паузи: жовтий майже квадратний блок з темними смужками всередині."""
     h, w = frame.shape[:2]
-    x0, x1, y0, y1 = PAUSE_ROI
-    roi = cv2.cvtColor(frame[int(y0 * h):int(y1 * h), int(x0 * w):int(x1 * w)], cv2.COLOR_BGR2HSV)
-    yellow = cv2.inRange(roi, (18, 140, 170), (35, 255, 255)).mean() / 255
-    dark = cv2.inRange(roi, (0, 0, 0), (180, 255, 70)).mean() / 255
-    return yellow >= min_yellow and dark <= max_dark
+    roi = frame[:int(PAUSE_SEARCH[1] * h), :int(PAUSE_SEARCH[0] * w)]
+    hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+    yellow = cv2.inRange(hsv, (18, 140, 170), (35, 255, 255))
+    n, labels, stats, _ = cv2.connectedComponentsWithStats(yellow)
+    for i in range(1, n):
+        x, y, bw, bh, area = stats[i]
+        if not 0.06 * w <= bw <= 0.16 * w or not 0.6 <= bw / max(bh, 1) <= 1.6:
+            continue
+        if area < 0.35 * bw * bh:
+            continue
+        inner = hsv[y + bh // 4:y + 3 * bh // 4, x + bw // 4:x + 3 * bw // 4]
+        dark = cv2.inRange(inner, (0, 0, 0), (180, 255, 90)).mean() / 255
+        if 0.15 <= dark <= 0.7:   # дві темні смужки «паузи»
+            return True
+    return False
 
 
-def segment_runs(times, flags, min_len=5.0, max_gap=1.5):
-    """Безперервні проміжки з HUD довші за min_len секунд; дірки до max_gap склеюються."""
+def segment_runs(times, flags, min_len=5.0, max_gap=4.0):
+    """Безперервні проміжки з HUD довші за min_len секунд.
+
+    Дірки до max_gap склеюються: посеред забігу HUD буває на 2-3 с закритий
+    ефектами, а між рівнями (результати, картка, завантаження) минає 15+ с.
+    """
     runs, start, last = [], None, None
     for t, on in zip(times, flags):
         if on:
