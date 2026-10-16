@@ -181,7 +181,12 @@ def _band(frame, play, dy, x_range=(0.06, 0.94)):
 def card_fingerprint(frame, play):
     """Нормований сірий «відбиток» блоку завдань: однаковий для того самого рівня
     незалежно від роздільної здатності телефону."""
-    band = cv2.cvtColor(_band(frame, play, OBJECTIVES_DY), cv2.COLOR_BGR2GRAY)
+    return band_fingerprint(_band(frame, play, OBJECTIVES_DY))
+
+
+def band_fingerprint(band):
+    """Відбиток уже вирізаного блоку завдань (так зберігаються картки маршрутів)."""
+    band = cv2.cvtColor(band, cv2.COLOR_BGR2GRAY)
     v = cv2.resize(band, (128, 40), interpolation=cv2.INTER_AREA).astype(np.float32).ravel()
     v -= v.mean()
     return v / (np.linalg.norm(v) + 1e-6)

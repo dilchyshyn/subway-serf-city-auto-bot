@@ -9,3 +9,4 @@ runs/
 *.pt
 *_openvino_model/
 *.onnx
+*.log

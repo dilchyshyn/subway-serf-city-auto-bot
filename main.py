@@ -5,7 +5,8 @@
   python main.py --show --dry-run                # лише дивитися рішення, без свайпів
   python main.py --vision heuristic --show       # без моделі, на кольорових евристиках
   python main.py --backend screenrecord --show   # захоплення без v4l2loopback
-  python main.py --route routes/docks_07.json    # пройти рівень City Tour за записаним маршрутом
+  python main.py --tour                          # рівень City Tour: бот упізнає його за карткою
+  python main.py --route routes/docks_07.json    # пройти рівень City Tour за конкретним маршрутом
   python main.py --dry-run --record rec/ --vision heuristic   # записувати кадри, поки граєш сам
 
 Клавіші у вікні (--show): r — скинути смугу на середню (на початку забігу),
@@ -27,6 +28,8 @@ from bot.heuristic import HeuristicDetector
 from bot.overlay import draw_overlay
 from bot.scene import build_scene
 
+ROOT = Path(__file__).resolve().parent
+
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -38,6 +41,8 @@ def parse_args():
     p.add_argument("--serial", help="серійний номер телефону, якщо підключено кілька")
     p.add_argument("--vision", choices=["yolo", "heuristic"], help="чим розпізнавати об'єкти")
     p.add_argument("--model", help="шлях до YOLO-моделі (.pt або експортованої)")
+    p.add_argument("--tour", action="store_true",
+                   help="відкрита картка рівня City Tour: упізнати рівень, натиснути PLAY і пройти за маршрутом")
     p.add_argument("--route", help="маршрут рівня City Tour (routes/*.json)")
     p.add_argument("--route-offset", type=float, default=0.0,
                    help="зсув маршруту в секундах, якщо рівень вантажиться довше/коротше, ніж під час запису")
@@ -73,12 +78,42 @@ def wait_for_run(cap, timeout):
     return False
 
 
+def pick_tour_route(cap, cfg, timeout=10):
+    """Чекає картку рівня на екрані й шукає для неї маршрут у бібліотеці."""
+    from bot.library import RouteLibrary
+    lib = RouteLibrary(ROOT / cfg["tour"]["routes"])
+    print(f"Маршрутів у бібліотеці: {len(lib)}")
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        frame = cap.read()
+        if frame is None:
+            time.sleep(0.01)
+            continue
+        match, play = lib.match(frame)
+        if play is None:
+            continue
+        if lib.confident(match, cfg):
+            print(f"Рівень упізнано: {match.name} (подібність {match.score:.2f}, відрив {match.margin:.2f})")
+            if match.crew:
+                print(f"Персонаж з відео (обраний у FEATURED CREW): {match.crew}")
+            return str(match.path), play
+        best = f"{match.name} ({match.score:.2f})" if match else "—"
+        print(f"Маршруту для цього рівня немає (найближчий: {best}). Гратиму у звичайному режимі.")
+        return None, play
+    raise SystemExit("Картку рівня з кнопкою PLAY не знайдено. Відкрий її на телефоні й запусти знову.")
+
+
 def main():
     args = parse_args()
     cfg = load_config(args.config, args.profile)
     backend = args.backend or cfg["capture"]["backend"]
     geo = LaneGeometry(cfg)
     player = None
+    cap = None
+    tour_play = None
+    if args.tour:
+        cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image)
+        args.route, tour_play = pick_tour_route(cap, cfg)
     if args.route:
         level, gestures, start_mode = routes.load(args.route)
         if not gestures:
@@ -88,16 +123,23 @@ def main():
     need_capture = need_vision or (args.route and start_mode == "hud")
 
     detector = make_detector(args.vision or cfg["vision"]["backend"], cfg, geo, args.model) if need_vision else None
-    cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image) if need_capture else None
+    if cap is None and need_capture:
+        cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image)
     ctl = DryRunController() if args.dry_run else AdbController(cfg, args.serial)
     brain = Brain(cfg)
+    play_xy = ((tour_play[0] + tour_play[2]) / 2, (tour_play[1] + tour_play[3]) / 2) if tour_play else cfg["play_button"]
+
+    if args.tour and not args.route:
+        ctl.tap(*play_xy)
+        if not wait_for_run(cap, cfg["route_start_timeout"]):
+            raise SystemExit("Забіг не почався: HUD так і не з'явився.")
 
     if args.route:
         print(f"Маршрут «{level}»: {len(gestures)} жестів, {gestures[-1].t:.1f} с.")
         if start_mode == "hud":
             # маршрут з відео: t=0 — поява HUD забігу, як і у відео
             print("Екран рівня з кнопкою PLAY має бути відкритий. Бот натисне її й чекатиме старту забігу.")
-            ctl.tap(*cfg["play_button"])
+            ctl.tap(*play_xy)
             if not wait_for_run(cap, cfg["route_start_timeout"]):
                 raise SystemExit("Забіг не почався: HUD так і не з'явився. Чи відкрито екран рівня?")
         elif start_mode == "manual":
