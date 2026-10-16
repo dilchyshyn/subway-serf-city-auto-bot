@@ -380,6 +380,37 @@ class VideoTest(unittest.TestCase):
         self.assertTrue(hud_visible(img))
 
 
+# Текст завдань, прочитаний OCR з карток справжнього відео (Phantom Park 11-15)
+CARD_TEXTS = {
+    "stomp8_a": "stompon8scoro75000collect3burledoachosfrophles",
+    "stomp8_b": "stompon8scoro75000collect3burledcachestrophles",
+    "pop13_a": "pop13loxloscorebao00collnot3bubblostrophilos",
+    "pop13_b": "pop13toxloscore68000collect3bubblostrophies",
+    "pop19": "pop19toxicscoro57000collect3bubblosbubblogums",
+    "stomp14": "bounoytarpsstompon14so0ro28800collect13colnsacks",
+}
+
+
+class CardTextTest(unittest.TestCase):
+    def test_same_level_despite_ocr_noise(self):
+        from bot.video import text_similarity
+        from bot.library import SAME_LEVEL
+        self.assertGreaterEqual(text_similarity(CARD_TEXTS["stomp8_a"], CARD_TEXTS["stomp8_b"]), SAME_LEVEL)
+        self.assertGreaterEqual(text_similarity(CARD_TEXTS["pop13_a"], CARD_TEXTS["pop13_b"]), SAME_LEVEL)
+
+    def test_levels_differ_by_numbers(self):
+        from bot.video import text_similarity
+        from bot.library import SAME_LEVEL
+        for a, b in (("pop13_b", "pop19"), ("stomp8_a", "stomp14"), ("pop19", "stomp8_b")):
+            self.assertLess(text_similarity(CARD_TEXTS[a], CARD_TEXTS[b]), SAME_LEVEL, (a, b))
+
+    def test_card_state_reads_green_rings(self):
+        from bot.video import card_state
+        band = np.full((120, 300, 3), (120, 60, 20), np.uint8)       # синя картка
+        cv2.circle(band, (250, 40), 25, (60, 200, 60), 6)          # третє завдання виконане
+        self.assertEqual(card_state(band), (0, 0, 1))
+
+
 class ProfileTest(unittest.TestCase):
     def test_profile_overrides_and_saves(self):
         with tempfile.TemporaryDirectory() as d:

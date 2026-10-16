@@ -148,7 +148,7 @@ def lane_events(bursts, width, start_lane=1, min_frac=0.25):
 # Відносно центру кнопки PLAY (частки висоти кадру): завдання рівня й обраний
 # персонаж з FEATURED CREW. Номер рівня не беремо: після перемішування рівнів
 # у турі він може змінитися, а завдання лишаються.
-OBJECTIVES_DY = (-0.42, -0.25)
+OBJECTIVES_DY = (-0.46, -0.22)  # із запасом: макет картки трохи зсувається після виконання завдань
 CREW_DY = (-0.17, -0.05)
 
 
@@ -199,3 +199,46 @@ def card_similarity(a, b):
 def crew_crop(frame, play):
     """Ряд FEATURED CREW: обраний персонаж підсвічений рамкою."""
     return _band(frame, play, CREW_DY, (0.0, 1.0))
+
+
+# ---------- текст і стан картки ----------
+# Рівні з однаковими типами завдань відрізняються лише числами («Pop 19 toxic
+# bubbles» / «Pop 13 toxic bubbles»), тож рівень упізнається за текстом (OCR).
+# Кільця завдань між спробами зеленіють, а текст лишається тим самим.
+_ocr = None
+_CONFUSABLE = str.maketrans({"o": "0", "l": "1", "i": "1", "s": "5", "b": "8", "z": "2", "g": "9"})
+
+
+def card_text(band):
+    """Текст завдань з вирізки картки (без лічильників «0/8»), нормалізований."""
+    global _ocr
+    if _ocr is None:
+        from rapidocr_onnxruntime import RapidOCR  # потрібен лише для режиму туру
+        _ocr = RapidOCR()
+    scale = max(1.0, 900 / band.shape[1])  # дрібний текст з відео збільшуємо
+    img = cv2.resize(band, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+    result, _ = _ocr(img)
+    words = [r[1] for r in sorted(result or [], key=lambda r: (r[0][0][1] // 40, r[0][0][0]))]
+    text = "".join(w for w in words if "/" not in w).lower()
+    return "".join(ch for ch in text if ch.isalnum())
+
+
+def text_similarity(a, b):
+    """Нечітка подібність текстів завдань; числа важать половину оцінки."""
+    from difflib import SequenceMatcher
+    if not a or not b:
+        return 0.0
+    norm = lambda s: s.translate(_CONFUSABLE)  # noqa: E731 — OCR плутає o/0, l/1 ...
+    digits = lambda s: "".join(ch for ch in s if ch.isdigit())  # noqa: E731
+    letters = SequenceMatcher(None, norm(a), norm(b)).ratio()
+    da, db = digits(a), digits(b)
+    nums = SequenceMatcher(None, da, db).ratio() if da and db else letters
+    return 0.5 * letters + 0.5 * nums
+
+
+def card_state(band):
+    """Які з трьох завдань уже виконані: зелене кільце над текстом завдання."""
+    h, w = band.shape[:2]
+    hsv = cv2.cvtColor(band[: int(0.7 * h)], cv2.COLOR_BGR2HSV)
+    green = cv2.inRange(hsv, (40, 110, 110), (85, 255, 255))
+    return tuple(int(green[:, int(k * w / 3):int((k + 1) * w / 3)].mean() / 255 > 0.04) for k in range(3))

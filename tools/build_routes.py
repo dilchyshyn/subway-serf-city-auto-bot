@@ -137,7 +137,10 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
             _, img, play = card
             (out_dir / "cards").mkdir(parents=True, exist_ok=True)
             (out_dir / "crew").mkdir(parents=True, exist_ok=True)
-            cv2.imwrite(str(out_dir / "cards" / f"{name}.png"), video._band(img, play, video.OBJECTIVES_DY))
+            band = video._band(img, play, video.OBJECTIVES_DY)
+            cv2.imwrite(str(out_dir / "cards" / f"{name}.png"), band)
+            meta["card_text"] = video.card_text(band)
+            meta["card_state"] = list(video.card_state(band))
             cv2.imwrite(str(out_dir / "crew" / f"{name}.png"), video.crew_crop(img, play))
             # для впізнавання рівня потрібен лише блок завдань; повні кадри в репозиторій не кладемо
             meta["card"] = f"cards/{name}.png"
