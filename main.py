@@ -56,11 +56,15 @@ def parse_args():
 
 
 def make_detector(kind, cfg, geo, model):
+    v = cfg["vision"]
+    path = model or v["model"]
+    if kind == "yolo" and not (ROOT / path).exists() and not Path(path).exists():
+        print(f"YOLO-модель {path} не знайдено — звичайний режим на евристиках (слабкий).")
+        kind = "heuristic"
     if kind == "heuristic":
         return HeuristicDetector(cfg, geo)
     from bot.detector import YoloDetector
-    v = cfg["vision"]
-    return YoloDetector(model or v["model"], v["conf"], v["imgsz"])
+    return YoloDetector(path, v["conf"], v["imgsz"])
 
 
 def wait_for_run(cap, timeout):
@@ -93,11 +97,12 @@ def pick_tour_route(cap, cfg, timeout=10):
         if play is None:
             continue
         if lib.confident(match, cfg):
-            print(f"Рівень упізнано: {match.name} (подібність {match.score:.2f}, відрив {match.margin:.2f})")
+            print(f"Рівень упізнано: {match.name} (подібність {match.score:.2f}, відрив {match.margin:.2f}, "
+                  f"спільних чисел {match.common})")
             if match.crew:
                 print(f"Персонаж з відео (обраний у FEATURED CREW): {match.crew}")
             return str(match.path), play
-        best = f"{match.name} ({match.score:.2f})" if match else "—"
+        best = f"{match.name} ({match.score:.2f}, спільних чисел {match.common})" if match else "—"
         print(f"Маршруту для цього рівня немає (найближчий: {best}). Гратиму у звичайному режимі.")
         return None, play
     raise SystemExit("Картку рівня з кнопкою PLAY не знайдено. Відкрий її на телефоні й запусти знову.")

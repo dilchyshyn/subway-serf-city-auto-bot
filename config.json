@@ -46,7 +46,7 @@
   },
   "tour": {
     "routes": "routes",
-    "min_score": 0.75,
+    "min_score": 0.65,
     "min_margin": 0.08
   },
   "route_start_timeout": 30,

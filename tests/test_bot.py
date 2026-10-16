@@ -404,6 +404,14 @@ class CardTextTest(unittest.TestCase):
         for a, b in (("pop13_b", "pop19"), ("stomp8_a", "stomp14"), ("pop19", "stomp8_b")):
             self.assertLess(text_similarity(CARD_TEXTS[a], CARD_TEXTS[b]), SAME_LEVEL, (a, b))
 
+    def test_close_scores_are_different_levels(self):
+        # живий OCR з телефона проти маршруту з іншим рівнем: 14000 ≠ 12000
+        from bot.video import text_similarity, common_numbers
+        live = "1500collect165score14000collecticoinstrophies"
+        other = "conootrocoinscon12000collectsnckstrophlas"
+        self.assertEqual(common_numbers(live, other), 0)
+        self.assertLess(text_similarity(live, other), 0.4)
+
     def test_card_state_reads_green_rings(self):
         from bot.video import card_state
         band = np.full((120, 300, 3), (120, 60, 20), np.uint8)       # синя картка

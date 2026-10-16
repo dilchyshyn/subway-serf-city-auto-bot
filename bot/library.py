@@ -14,7 +14,8 @@ import cv2
 
 from . import route, video
 
-SAME_LEVEL = 0.75  # подібність тексту завдань, з якої це той самий рівень
+SAME_LEVEL = 0.65  # подібність тексту завдань, з якої це той самий рівень
+MIN_COMMON_NUMBERS = 2  # для впевненого збігу потрібні щонайменше 2 однакові числа завдань
 
 
 @dataclass
@@ -32,6 +33,7 @@ class Match:
     name: str
     score: float      # подібність тексту найкращого рівня
     margin: float     # відрив від найкращого іншого рівня
+    common: int       # скільки чисел завдань збіглося точно
     state: tuple      # стан картки на телефоні
     crew: Path | None  # кадр FEATURED CREW з відео: яким персонажем грали
 
@@ -77,7 +79,8 @@ class RouteLibrary:
         attempts = sorted(same or [scored[0][1]], key=lambda e: e.path.name)
         pick = max(enumerate(attempts),
                    key=lambda ie: (ie[1].state == state, sum(a == b for a, b in zip(ie[1].state, state)), -ie[0]))[1]
-        return Match(pick.path, pick.name, best, margin, state, pick.crew)
+        return Match(pick.path, pick.name, best, margin, video.common_numbers(text, scored[0][1].text),
+                     state, pick.crew)
 
     def match(self, frame):
         """(Match або None, рамка кнопки PLAY або None) для кадру з карткою рівня."""
@@ -88,7 +91,8 @@ class RouteLibrary:
 
     @staticmethod
     def confident(m, cfg):
-        return m is not None and m.score >= cfg["tour"]["min_score"] and m.margin >= cfg["tour"]["min_margin"]
+        return (m is not None and m.score >= cfg["tour"]["min_score"] and m.margin >= cfg["tour"]["min_margin"]
+                and m.common >= MIN_COMMON_NUMBERS)
 
 
 def load_route(path):

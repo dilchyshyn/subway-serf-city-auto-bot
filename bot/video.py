@@ -251,9 +251,10 @@ def _numbers(s):
     return {n for n in re.findall(r"\d+", s) if int(n) > 0}
 
 
-def _same_number(a, b):
-    """Те саме число з поправкою на OCR: однакова довжина й щонайбільше одна інша цифра."""
-    return a == b or (len(a) == len(b) and len(a) >= 3 and sum(x != y for x, y in zip(a, b)) <= 1)
+def common_numbers(a, b):
+    """Скільки чисел завдань збігаються точно. Допуск на «одну іншу цифру» не
+    годиться: тоді 12000, 14000 і 16000 «однакові», і бот грає чужий рівень."""
+    return len(_numbers(a) & _numbers(b))
 
 
 def _grams(s):
@@ -265,7 +266,7 @@ def text_similarity(a, b):
     """Подібність текстів завдань, нечутлива до порядку рядків (OCR читає їх по-різному).
 
     Головне — числа завдань (рівні з однаковими типами завдань відрізняються саме
-    ними): частка збігу меншої множини чисел з більшою. Збіг трибуквених
+    ними): частка точно збіжних чисел від більшої множини. Збіг трибуквених
     фрагментів слів лише уточнює оцінку.
     """
     if not a or not b:
@@ -274,9 +275,8 @@ def text_similarity(a, b):
     letters = 2 * len(ga & gb) / (len(ga) + len(gb)) if ga and gb else 0.0
     na, nb = _numbers(a), _numbers(b)
     if not na or not nb:
-        return letters
-    small, big = sorted((na, nb), key=len)
-    nums = sum(any(_same_number(x, y) for y in big) for x in small) / len(small)
+        return 0.3 * letters
+    nums = len(na & nb) / max(len(na), len(nb))
     return 0.7 * nums + 0.3 * letters
 
 
