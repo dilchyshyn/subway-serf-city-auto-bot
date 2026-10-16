@@ -116,7 +116,6 @@ def main():
                 continue
             h, w = frame.shape[:2]
             scene = build_scene(detector.detect(frame), w, h, geo, cfg)
-            brain.sync_lane(scene.player_lane, now)
 
             action = None
             if not paused:

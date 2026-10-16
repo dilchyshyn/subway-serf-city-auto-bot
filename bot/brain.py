@@ -10,6 +10,11 @@
 5. Збирати предмети. Якщо поточна смуга безпечна, а в чистій сусідній
    предметів суттєво більше, перейти туди. Ваги: пауер-ап > Energy >
    звичайні монети > монети для бордів.
+
+Камера в City йде за персонажем вбік, тому на екрані по центру завжди
+поточна смуга: scene.lanes = [ліва від гравця, поточна, права]. Абсолютну
+смугу (0 = ліва, 1 = середня, 2 = права) бот пам'ятає сам, щоб не свайпати
+в стіну.
 """
 from .classes import HIGH
 
@@ -36,14 +41,13 @@ class Brain:
         self.lane = target
         return action
 
-    def sync_lane(self, lane, now):
-        """Уточнити смугу за детекцією персонажа (не посеред руху між смугами)."""
-        if lane is not None and now >= self._busy_until:
-            self.lane = lane
+    def _absolute(self, scene):
+        """Екранні смуги -> {абсолютна смуга: стан}. Смуг за стіною в словнику немає."""
+        return {self.lane + s - 1: st for s, st in enumerate(scene.lanes) if 0 <= self.lane + s - 1 <= 2}
 
     def emergency(self, scene, now):
         """Лише стрибок/пірнання перед перешкодою, без зміни смуги (для режиму маршруту)."""
-        cur = scene.lanes[self.lane]
+        cur = scene.lanes[1]
         if now < self._busy_until or cur.near is None:
             return None
         self._busy_until = now + self.cfg["action_cooldown"]
@@ -52,9 +56,9 @@ class Brain:
     def decide(self, scene, now):
         if now < self._busy_until:
             return None
-        lanes = scene.lanes
+        lanes = self._absolute(scene)
         cur = lanes[self.lane]
-        neighbours = [l for l in (self.lane - 1, self.lane + 1) if 0 <= l <= 2]
+        neighbours = [l for l in (self.lane - 1, self.lane + 1) if l in lanes]
         clear = [l for l in neighbours if lanes[l].near is None and lanes[l].far is None]
         cooldown = self.cfg["action_cooldown"]
 

@@ -79,16 +79,9 @@ class SceneTest(unittest.TestCase):
         self.assertFalse(far.lanes[2].stomp)
         self.assertGreater(far.lanes[2].value, 0)  # але в смугу з нею варто перейти
 
-    def test_player_lane(self):
-        s = self.scene([box_at(self.geo, "player", 2, 0.80, 0.08, 0.12)])
-        self.assertEqual(s.player_lane, 2)
+    def test_player_is_not_an_obstacle(self):
+        s = self.scene([box_at(self.geo, "player", 1, 0.80, 0.08, 0.12)])
         self.assertTrue(all(l.value == 0 and l.near is None for l in s.lanes))
-        b = Brain(self.cfg, lane=1)
-        b.sync_lane(s.player_lane, now=0)
-        self.assertEqual(b.lane, 2)
-        b.decide(sc(st(), st(), st(TALL)), now=0)  # почав рух вліво
-        b.sync_lane(2, now=0.1)                     # кадр ще показує стару смугу — ігноруємо
-        self.assertEqual(b.lane, 1)
 
     def test_off_road_pickup_ignored(self):
         s = self.scene([Detection("coin", 0.9, 0, 0.6 * H, 10, 0.6 * H + 10)])
@@ -121,10 +114,25 @@ class BrainTest(unittest.TestCase):
         self.assertEqual(b.decide(sc(st(value=6), st(TALL), st()), now=0), LEFT)
 
     def test_jump_or_roll_when_boxed_in(self):
+        # у лівій смузі: зліва стіна (екранна смуга 0 ігнорується), справа вагон
         b = Brain(self.cfg, lane=0)
-        self.assertEqual(b.decide(sc(st(LOW), st(TALL), st()), now=0), JUMP)
+        self.assertEqual(b.decide(sc(st(), st(LOW), st(TALL)), now=0), JUMP)
         b = Brain(self.cfg, lane=0)
-        self.assertEqual(b.decide(sc(st(HIGH), st(TALL), st()), now=0), ROLL)
+        self.assertEqual(b.decide(sc(st(), st(HIGH), st(TALL)), now=0), ROLL)
+
+    def test_never_swipe_into_wall(self):
+        b = Brain(self.cfg, lane=2)
+        # справа від крайньої правої смуги — стіна, навіть якщо там «порожньо»
+        self.assertEqual(b.decide(sc(st(TALL), st(TALL), st()), now=0), JUMP)
+        b = Brain(self.cfg, lane=2)
+        self.assertEqual(b.decide(sc(st(), st(TALL), st()), now=0), LEFT)
+        self.assertEqual(b.lane, 1)
+
+    def test_lanes_are_relative_to_player(self):
+        # після переходу вліво екранна «права» смуга — це колишня поточна
+        b = Brain(self.cfg, lane=1)
+        self.assertEqual(b.decide(sc(st(), st(TALL), st(TALL)), now=0), LEFT)
+        self.assertEqual(b.decide(sc(st(), st(), st(value=10)), now=1), RIGHT)
 
     def test_cooldown(self):
         b = Brain(self.cfg, lane=1)
