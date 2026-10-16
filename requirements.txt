@@ -1,0 +1,4 @@
+opencv-python>=4.9
+numpy>=1.26
+av>=12
+ultralytics>=8.3

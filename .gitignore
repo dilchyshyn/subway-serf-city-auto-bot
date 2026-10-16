@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+# кадри гри, датасет і результати тренування — локально, не в репозиторій
+rec/
+dataset/
+dataset.zip
+runs/
+*.pt
+*_openvino_model/
+*.onnx
