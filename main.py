@@ -21,7 +21,7 @@ import cv2
 from bot import load_config
 from bot import route as routes
 from bot.brain import LEFT, RIGHT, Brain
-from bot.capture import BACKENDS, open_capture
+from bot.capture import BACKENDS, ImageCapture, open_capture
 from bot.controls import AdbController, DryRunController
 from bot.geometry import LaneGeometry
 from bot.heuristic import HeuristicDetector
@@ -84,14 +84,20 @@ def wait_for_run(cap, timeout):
     return False
 
 
-def pick_tour_route(cap, cfg, timeout=10):
-    """Чекає картку рівня на екрані й шукає для неї маршрут у бібліотеці."""
+def pick_tour_route(cap, cfg, serial=None, timeout=10):
+    """Чекає картку рівня на екрані й шукає для неї маршрут у бібліотеці.
+
+    Текст завдань дрібний, тож картку читаємо з повнороздільного знімка екрана
+    (screencap), а не з відеопотоку: стиснутий 544-піксельний кадр OCR читає гірше.
+    """
+    from bot.capture import ScreencapCapture
     from bot.library import RouteLibrary
     lib = RouteLibrary(ROOT / cfg["tour"]["routes"])
     print(f"Маршрутів у бібліотеці: {len(lib)}")
+    shot = cap if isinstance(cap, ImageCapture) else ScreencapCapture(serial)
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
-        frame = cap.read()
+        frame = shot.read()
         if frame is None:
             time.sleep(0.01)
             continue
@@ -106,6 +112,7 @@ def pick_tour_route(cap, cfg, timeout=10):
             return str(match.path), play
         best = f"{match.name} ({match.score:.2f}, спільних чисел {match.common})" if match else "—"
         print(f"Маршруту для цього рівня немає (найближчий: {best}). Гратиму у звичайному режимі.")
+        print(f"Прочитані завдання: {match.text if match else '—'}")
         return None, play
     raise SystemExit("Картку рівня з кнопкою PLAY не знайдено. Відкрий її на телефоні й запусти знову.")
 
@@ -120,7 +127,7 @@ def main():
     tour_play = None
     if args.tour:
         cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image)
-        args.route, tour_play = pick_tour_route(cap, cfg)
+        args.route, tour_play = pick_tour_route(cap, cfg, args.serial)
     if args.route:
         level, gestures, start_mode = routes.load(args.route)
         if not gestures:

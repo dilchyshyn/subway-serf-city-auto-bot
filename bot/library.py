@@ -34,6 +34,7 @@ class Match:
     score: float      # подібність тексту найкращого рівня
     margin: float     # відрив від найкращого іншого рівня
     common: int       # скільки чисел завдань збіглося точно
+    text: str         # що OCR прочитав на картці (для діагностики)
     state: tuple      # стан картки на телефоні
     crew: Path | None  # кадр FEATURED CREW з відео: яким персонажем грали
 
@@ -83,7 +84,7 @@ class RouteLibrary:
         pick = max(enumerate(attempts),
                    key=lambda ie: (ie[1].state == state, sum(a == b for a, b in zip(ie[1].state, state)), -ie[0]))[1]
         return Match(pick.path, pick.name, best, margin, video.common_numbers(text, top.text),
-                     state, pick.crew)
+                     text, state, pick.crew)
 
     def match(self, frame):
         """(Match або None, рамка кнопки PLAY або None) для кадру з карткою рівня."""
