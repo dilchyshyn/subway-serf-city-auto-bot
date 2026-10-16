@@ -142,3 +142,55 @@ def lane_events(bursts, width, start_lane=1, min_frac=0.25):
         for k in range(abs(d)):
             out.append((t0 + k * 0.1, "right" if d > 0 else "left"))
     return out, dropped
+
+
+# ---------- картка рівня ----------
+# Відносно центру кнопки PLAY (частки висоти кадру): завдання рівня й обраний
+# персонаж з FEATURED CREW. Номер рівня не беремо: після перемішування рівнів
+# у турі він може змінитися, а завдання лишаються.
+OBJECTIVES_DY = (-0.42, -0.25)
+CREW_DY = (-0.17, -0.05)
+
+
+def find_play_button(frame):
+    """Рамка жовтої кнопки PLAY (x1, y1, x2, y2 у частках кадру) або None."""
+    h, w = frame.shape[:2]
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(hsv, (15, 150, 190), (32, 255, 255))
+    mask[:int(0.5 * h)] = 0
+    n, _, stats, _ = cv2.connectedComponentsWithStats(mask)
+    best = None
+    for i in range(1, n):
+        x, y, bw, bh, area = stats[i]
+        if 0.5 * w <= bw <= 0.8 * w and 0.03 * h <= bh <= 0.08 * h and area >= 0.6 * bw * bh:
+            if best is None or y > best[1]:  # найнижча з придатних
+                best = (x, y, bw, bh)
+    if best is None:
+        return None
+    x, y, bw, bh = best
+    return x / w, y / h, (x + bw) / w, (y + bh) / h
+
+
+def _band(frame, play, dy, x_range=(0.06, 0.94)):
+    h, w = frame.shape[:2]
+    cy = (play[1] + play[3]) / 2
+    y0, y1 = max(int((cy + dy[0]) * h), 0), max(int((cy + dy[1]) * h), 1)
+    return frame[y0:y1, int(x_range[0] * w):int(x_range[1] * w)]
+
+
+def card_fingerprint(frame, play):
+    """Нормований сірий «відбиток» блоку завдань: однаковий для того самого рівня
+    незалежно від роздільної здатності телефону."""
+    band = cv2.cvtColor(_band(frame, play, OBJECTIVES_DY), cv2.COLOR_BGR2GRAY)
+    v = cv2.resize(band, (128, 40), interpolation=cv2.INTER_AREA).astype(np.float32).ravel()
+    v -= v.mean()
+    return v / (np.linalg.norm(v) + 1e-6)
+
+
+def card_similarity(a, b):
+    return float(np.dot(a, b))
+
+
+def crew_crop(frame, play):
+    """Ряд FEATURED CREW: обраний персонаж підсвічений рамкою."""
+    return _band(frame, play, CREW_DY, (0.0, 1.0))
