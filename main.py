@@ -58,6 +58,21 @@ def make_detector(kind, cfg, geo, model):
     return YoloDetector(model or v["model"], v["conf"], v["imgsz"])
 
 
+def wait_for_run(cap, timeout):
+    """Чекає, доки на екрані з'явиться HUD забігу (2 кадри поспіль)."""
+    from bot.video import hud_visible
+    deadline, streak = time.monotonic() + timeout, 0
+    while time.monotonic() < deadline:
+        frame = cap.read()
+        if frame is None:
+            time.sleep(0.005)
+            continue
+        streak = streak + 1 if hud_visible(frame) else 0
+        if streak >= 2:
+            return True
+    return False
+
+
 def main():
     args = parse_args()
     cfg = load_config(args.config, args.profile)
@@ -69,16 +84,23 @@ def main():
         if not gestures:
             raise SystemExit(f"Маршрут {args.route} порожній")
     need_vision = not args.route or args.route_guard or args.show or args.record
+    # маршрут з відео стартує за появою HUD на екрані — для цього потрібні кадри
+    need_capture = need_vision or (args.route and start_mode == "hud")
 
     detector = make_detector(args.vision or cfg["vision"]["backend"], cfg, geo, args.model) if need_vision else None
-    cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image) if need_vision else None
+    cap = open_capture(backend, args.device or cfg["capture"]["device"], args.serial, args.image) if need_capture else None
     ctl = DryRunController() if args.dry_run else AdbController(cfg, args.serial)
     brain = Brain(cfg)
 
     if args.route:
         print(f"Маршрут «{level}»: {len(gestures)} жестів, {gestures[-1].t:.1f} с.")
-        if start_mode == "manual":
-            # маршрут з відео: тапу «Грати» в ньому немає, синхронізуємося за стартом забігу
+        if start_mode == "hud":
+            # маршрут з відео: t=0 — поява HUD забігу, як і у відео
+            print("Екран рівня з кнопкою PLAY має бути відкритий. Бот натисне її й чекатиме старту забігу.")
+            ctl.tap(*cfg["play_button"])
+            if not wait_for_run(cap, cfg["route_start_timeout"]):
+                raise SystemExit("Забіг не почався: HUD так і не з'явився. Чи відкрито екран рівня?")
+        elif start_mode == "manual":
             input("Натисни «Грати» на телефоні, потім Enter тут у момент, коли персонаж почне бігти...")
         else:
             print("Екран рівня з кнопкою «Грати» має бути відкритий, бот натисне її сам.")

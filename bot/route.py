@@ -94,10 +94,12 @@ def record(path, level, serial=None, on_gesture=print):
     return gestures
 
 
-def save(path, level, gestures, start="tap", rebase=True):
-    """start: "tap" — маршрут починається з тапу «Грати»; "manual" — з моменту старту забігу."""
+def save(path, level, gestures, start="tap", rebase=True, meta=None):
+    """start: "tap" — маршрут починається з тапу «Грати» (свій запис);
+    "hud" — t=0 у момент появи HUD забігу (з відео, бот синхронізується сам);
+    "manual" — t=0 за натисканням Enter."""
     t0 = gestures[0].t if gestures and rebase else 0
-    data = {"level": level, "start": start,
+    data = {"level": level, "start": start, **(meta or {}),
             "gestures": [asdict(g) | {"t": round(g.t - t0, 3)} for g in gestures]}
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=1, ensure_ascii=False)

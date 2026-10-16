@@ -49,6 +49,11 @@ class AdbController:
         self.shell.stdin.write(f"({self._command(action)}) &\n")
         self.shell.stdin.flush()
 
+    def tap(self, x, y):
+        """Тап у нормованих координатах (0..1)."""
+        self.shell.stdin.write(f"(input tap {int(x * self.width)} {int(y * self.height)}) &\n")
+        self.shell.stdin.flush()
+
     def gesture(self, g):
         """Точне відтворення записаного жесту (route.Gesture) з його координатами."""
         x1, y1 = int(g.x1 * self.width), int(g.y1 * self.height)
@@ -69,6 +74,9 @@ class DryRunController:
 
     def act(self, action):
         print(f"[dry-run] {action}")
+
+    def tap(self, x, y):
+        print(f"[dry-run] tap {x:.2f},{y:.2f}")
 
     def gesture(self, g):
         print(f"[dry-run] route {g.t:.2f}s {g.action}")
