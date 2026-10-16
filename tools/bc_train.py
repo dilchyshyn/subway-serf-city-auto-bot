@@ -34,6 +34,30 @@ def load(files):
     return np.concatenate(xs), np.concatenate(ps), np.concatenate(ys), np.concatenate(runs)
 
 
+def augment(xb, pb, rng):
+    """Відео з YouTube і екран телефона виглядають по-різному (стиснення, різкість,
+    кольори), тож кадри випадково псуються однаково для обох входів: модель
+    має вчитися на сцені, а не на артефактах конкретного відео."""
+    import cv2
+    xb, pb = xb.astype(np.float32), pb.astype(np.float32)
+    n = len(xb)
+    gain = rng.uniform(0.8, 1.2, (n, 1, 1, 1)) * rng.uniform(0.9, 1.1, (n, 1, 1, 3))  # яскравість і баланс кольорів
+    bias = rng.uniform(-15, 15, (n, 1, 1, 1))
+    xb, pb = xb * gain + bias, pb * gain + bias
+    noise = rng.normal(0, rng.uniform(0, 6), (n, 1, 1, 1))
+    xb = xb + noise * rng.standard_normal(xb.shape)
+    xb, pb = np.clip(xb, 0, 255).astype(np.uint8), np.clip(pb, 0, 255).astype(np.uint8)
+    for i in range(n):
+        if rng.random() < 0.4:  # розмиття, як у стиснутого відео
+            k = int(rng.choice([3, 5]))
+            xb[i], pb[i] = cv2.GaussianBlur(xb[i], (k, k), 0), cv2.GaussianBlur(pb[i], (k, k), 0)
+        if rng.random() < 0.5:  # артефакти JPEG/H.264 різної якості
+            q = [cv2.IMWRITE_JPEG_QUALITY, int(rng.integers(30, 90))]
+            xb[i] = cv2.imdecode(cv2.imencode(".jpg", xb[i], q)[1], cv2.IMREAD_COLOR)
+            pb[i] = cv2.imdecode(cv2.imencode(".jpg", pb[i], q)[1], cv2.IMREAD_COLOR)
+    return xb, pb
+
+
 def event_metrics(probs, y, runs, thr, window=2):
     """Подійні метрики: влучання дією в ±window кадрів і хибні спрацювання."""
     pred = probs.argmax(1)
@@ -68,6 +92,7 @@ def main():
 
     random.seed(args.seed)
     torch.manual_seed(args.seed)
+    rng = np.random.default_rng(args.seed)
     files = sorted(Path(args.data).glob("*.npz"))
     random.shuffle(files)
     val_files, train_files = files[: args.val_videos], files[args.val_videos:]
@@ -103,7 +128,7 @@ def main():
         total = 0.0
         for i in range(0, len(order), args.batch):
             idx = order[i:i + args.batch]
-            xb, pb = x[idx], px[idx]
+            xb, pb = augment(x[idx], px[idx], rng)
             if random.random() < 0.5:  # гра симетрична: дзеркало міняє вліво ↔ вправо
                 xb, pb = xb[:, :, ::-1].copy(), pb[:, :, ::-1].copy()
                 yb = np.where(y[idx] == 1, 2, np.where(y[idx] == 2, 1, y[idx]))
