@@ -10,6 +10,13 @@
  "dropped_lane_events": [
   28.23
  ],
+ "bounces": [
+  13.77,
+  22.1,
+  24.97,
+  30.9,
+  37.9
+ ],
  "player_frames": 401,
  "card_text": "stompon7soore26000colloctburledoaohostrophios",
  "card_state": [
@@ -156,6 +163,15 @@
    "duration_ms": 40
   },
   {
+   "t": 13.647,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 14.984,
    "action": "jump",
    "x1": 0.5,
@@ -219,6 +235,15 @@
    "duration_ms": 40
   },
   {
+   "t": 21.98,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 22.534,
    "action": "right",
    "x1": 0.5,
@@ -243,6 +268,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 24.847,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -282,6 +316,15 @@
    "duration_ms": 40
   },
   {
+   "t": 30.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 33.634,
    "action": "left",
    "x1": 0.5,
@@ -315,6 +358,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 37.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   }
  ]

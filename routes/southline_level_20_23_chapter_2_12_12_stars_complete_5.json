@@ -8,6 +8,9 @@
   330.63
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  27.07
+ ],
  "player_frames": 387,
  "card_text": "0717krollnomarosconenococollecl4sthonatimesreccimmondudsuuferbwec",
  "card_state": [
@@ -232,6 +235,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 26.947,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

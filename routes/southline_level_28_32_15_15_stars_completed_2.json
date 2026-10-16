@@ -8,6 +8,9 @@
   120.97
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  34.93
+ ],
  "player_frames": 699,
  "card_text": "collect300scoro13000jumpnomorecoingthan3timos",
  "card_state": [
@@ -205,6 +208,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 34.814,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

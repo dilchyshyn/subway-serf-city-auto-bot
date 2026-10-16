@@ -11,6 +11,12 @@
   14.33,
   29.4
  ],
+ "bounces": [
+  7.67,
+  8.5,
+  9.77,
+  11.5
+ ],
  "player_frames": 508,
  "card_text": "toroolwhg1001934000chingolarsno",
  "card_state": [
@@ -21,6 +27,24 @@
  "card": "cards/delorean_park_hard_mode_chapter_3_3_1_3_5_all_stars_15_15_fu_5.jpg",
  "crew": "crew/delorean_park_hard_mode_chapter_3_3_1_3_5_all_stars_15_15_fu_5.jpg",
  "gestures": [
+  {
+   "t": 7.546,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
   {
    "t": 9.366,
    "action": "roll",
@@ -37,6 +61,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

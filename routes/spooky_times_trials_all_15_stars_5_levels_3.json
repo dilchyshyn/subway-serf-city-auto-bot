@@ -12,6 +12,10 @@
   12.6,
   20.8
  ],
+ "bounces": [
+  3.93,
+  37.53
+ ],
  "player_frames": 173,
  "card_text": "trigger8steamscoreb200colloct3vontsmegnets",
  "card_state": [
@@ -29,6 +33,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.814,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -191,6 +204,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 37.414,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

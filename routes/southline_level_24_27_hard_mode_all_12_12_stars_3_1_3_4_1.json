@@ -10,6 +10,13 @@
  "dropped_lane_events": [
   39.8
  ],
+ "bounces": [
+  4.9,
+  8.27,
+  33.43,
+  34.2,
+  43.7
+ ],
  "player_frames": 616,
  "card_text": "triggorsteamscore22000changolnnenovontsnsorothan13timos",
  "card_state": [
@@ -36,6 +43,24 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.146,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -165,12 +190,30 @@
    "duration_ms": 40
   },
   {
+   "t": 33.313,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 33.75,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 34.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -243,15 +286,6 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.85,
-   "duration_ms": 40
-  },
-  {
-   "t": 43.816,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
    "duration_ms": 40
   },
   {

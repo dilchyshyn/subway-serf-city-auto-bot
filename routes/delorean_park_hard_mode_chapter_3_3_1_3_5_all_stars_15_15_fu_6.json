@@ -11,6 +11,9 @@
   17.13,
   32.27
  ],
+ "bounces": [
+  11.63
+ ],
  "player_frames": 578,
  "card_text": "hophoscoloetlseore17000jumpnomorehandimes",
  "card_state": [
@@ -112,12 +115,12 @@
    "duration_ms": 40
   },
   {
-   "t": 11.883,
-   "action": "jump",
+   "t": 11.513,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -10,6 +10,11 @@
  "dropped_lane_events": [
   6.6
  ],
+ "bounces": [
+  3.53,
+  15.2,
+  24.17
+ ],
  "player_frames": 566,
  "card_text": "pop8bubblesscore36000stomponlbounoytarps",
  "card_state": [
@@ -27,6 +32,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.414,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -75,6 +89,15 @@
    "duration_ms": 40
   },
   {
+   "t": 15.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 16.567,
    "action": "left",
    "x1": 0.5,
@@ -117,6 +140,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 24.047,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

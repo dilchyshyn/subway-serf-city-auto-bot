@@ -13,6 +13,9 @@
   34.27,
   37.77
  ],
+ "bounces": [
+  48.67
+ ],
  "player_frames": 724,
  "card_text": "colleaf2aoinsacksscor13000intorectwith3hurdlos",
  "card_state": [
@@ -321,12 +324,12 @@
    "duration_ms": 40
   },
   {
-   "t": 48.784,
-   "action": "jump",
+   "t": 48.547,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

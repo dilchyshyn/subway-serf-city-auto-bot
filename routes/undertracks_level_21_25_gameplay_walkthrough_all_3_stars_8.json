@@ -8,6 +8,9 @@
   376.0
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  9.3
+ ],
  "player_frames": 20,
  "card_text": "coloct180score30900stompon10colnsburlodoadhos",
  "card_state": [
@@ -43,6 +46,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   }
  ]

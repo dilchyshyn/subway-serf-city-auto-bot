@@ -11,6 +11,9 @@
   8.23,
   14.43
  ],
+ "bounces": [
+  14.07
+ ],
  "player_frames": 635,
  "card_text": "collect2coinscore33000colloc1270doublerscoing",
  "card_state": [
@@ -145,6 +148,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 13.946,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -10,6 +10,11 @@
  "dropped_lane_events": [
   11.03
  ],
+ "bounces": [
+  4.0,
+  13.0,
+  17.77
+ ],
  "player_frames": 160,
  "card_text": "colloct3scoro624o0jumpnomoretrophlosthan3limos",
  "card_state": [
@@ -27,6 +32,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.88,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -54,6 +68,24 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.88,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 17.647,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

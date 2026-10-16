@@ -8,6 +8,14 @@
   124.6
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  7.9,
+  10.93,
+  14.03,
+  21.47,
+  24.43,
+  25.1
+ ],
  "player_frames": 480,
  "card_text": "score20000stompon7bubblegumsburiedoaohos",
  "card_state": [
@@ -73,6 +81,15 @@
    "duration_ms": 40
   },
   {
+   "t": 7.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 8.183,
    "action": "jump",
    "x1": 0.5,
@@ -91,12 +108,12 @@
    "duration_ms": 40
   },
   {
-   "t": 10.85,
-   "action": "jump",
+   "t": 10.813,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -118,12 +135,12 @@
    "duration_ms": 40
   },
   {
-   "t": 14.25,
-   "action": "jump",
+   "t": 13.913,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -163,12 +180,12 @@
    "duration_ms": 40
   },
   {
-   "t": 21.317,
-   "action": "jump",
+   "t": 21.347,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -208,6 +225,15 @@
    "duration_ms": 40
   },
   {
+   "t": 24.313,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 24.6,
    "action": "right",
    "x1": 0.5,
@@ -217,12 +243,12 @@
    "duration_ms": 40
   },
   {
-   "t": 25.25,
-   "action": "jump",
+   "t": 24.98,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

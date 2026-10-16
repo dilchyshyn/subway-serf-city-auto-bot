@@ -12,6 +12,10 @@
   18.43,
   36.2
  ],
+ "bounces": [
+  6.33,
+  10.03
+ ],
  "player_frames": 547,
  "card_text": "interectwlthbscore18000jumpnomorehurdlosthan3timos",
  "card_state": [
@@ -68,6 +72,15 @@
    "duration_ms": 40
   },
   {
+   "t": 6.213,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 7.716,
    "action": "jump",
    "x1": 0.5,
@@ -83,6 +96,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.913,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

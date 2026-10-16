@@ -13,6 +13,16 @@
   7.87,
   78.57
  ],
+ "bounces": [
+  8.4,
+  21.43,
+  39.5,
+  48.4,
+  50.53,
+  63.27,
+  78.2,
+  89.3
+ ],
  "player_frames": 895,
  "card_text": "underiracksstormponescoro25000juapnomordburlodcachosthen31tnsos",
  "card_state": [
@@ -57,6 +67,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.28,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -150,6 +169,15 @@
    "duration_ms": 40
   },
   {
+   "t": 21.314,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 30.95,
    "action": "jump",
    "x1": 0.5,
@@ -186,6 +214,15 @@
    "duration_ms": 40
   },
   {
+   "t": 39.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 43.95,
    "action": "jump",
    "x1": 0.5,
@@ -213,12 +250,21 @@
    "duration_ms": 40
   },
   {
-   "t": 48.417,
-   "action": "jump",
+   "t": 48.28,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 50.414,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -321,6 +367,15 @@
    "duration_ms": 40
   },
   {
+   "t": 63.147,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 64.067,
    "action": "left",
    "x1": 0.5,
@@ -420,6 +475,15 @@
    "duration_ms": 40
   },
   {
+   "t": 78.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 79.017,
    "action": "jump",
    "x1": 0.5,
@@ -462,6 +526,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 89.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -8,6 +8,11 @@
   206.0
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  25.03,
+  37.0,
+  41.37
+ ],
  "player_frames": 645,
  "card_text": "collect6score34000colloct180coing",
  "card_state": [
@@ -127,6 +132,15 @@
    "duration_ms": 40
   },
   {
+   "t": 24.914,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 25.684,
    "action": "jump",
    "x1": 0.5,
@@ -208,6 +222,15 @@
    "duration_ms": 40
   },
   {
+   "t": 36.88,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 37.234,
    "action": "right",
    "x1": 0.5,
@@ -223,6 +246,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 41.247,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

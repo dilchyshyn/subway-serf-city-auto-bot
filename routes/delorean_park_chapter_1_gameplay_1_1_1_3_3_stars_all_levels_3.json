@@ -10,6 +10,9 @@
  "dropped_lane_events": [
   22.2
  ],
+ "bounces": [
+  36.7
+ ],
  "player_frames": 516,
  "card_text": "x2collect2icoinscorb500colloct130doublorscoins",
  "card_state": [
@@ -279,6 +282,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 36.58,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

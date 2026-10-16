@@ -10,6 +10,12 @@
  "dropped_lane_events": [
   20.07
  ],
+ "bounces": [
+  3.97,
+  11.23,
+  19.3,
+  32.2
+ ],
  "player_frames": 637,
  "card_text": "collect95s00re25000triggerzisleamcoingvonto",
  "card_state": [
@@ -27,6 +33,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.847,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -66,6 +81,15 @@
    "duration_ms": 40
   },
   {
+   "t": 11.113,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 13.55,
    "action": "jump",
    "x1": 0.5,
@@ -99,6 +123,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 19.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -180,6 +213,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 32.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -12,6 +12,10 @@
   4.6,
   32.8
  ],
+ "bounces": [
+  8.43,
+  33.6
+ ],
  "player_frames": 454,
  "card_text": "12storponcolloctburkdochea",
  "card_state": [
@@ -59,12 +63,12 @@
    "duration_ms": 40
   },
   {
-   "t": 8.683,
-   "action": "jump",
+   "t": 8.313,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -158,12 +162,12 @@
    "duration_ms": 40
   },
   {
-   "t": 33.816,
-   "action": "jump",
+   "t": 33.48,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

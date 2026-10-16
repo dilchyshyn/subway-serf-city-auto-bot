@@ -11,6 +11,10 @@
   20.67,
   35.67
  ],
+ "bounces": [
+  7.03,
+  41.13
+ ],
  "player_frames": 384,
  "card_text": "4kchangelaneno00trigger5steammorethan3venls",
  "card_state": [
@@ -55,6 +59,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.913,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -184,12 +197,12 @@
    "duration_ms": 40
   },
   {
-   "t": 41.283,
-   "action": "jump",
+   "t": 41.013,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

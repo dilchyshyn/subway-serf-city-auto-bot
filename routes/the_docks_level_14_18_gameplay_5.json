@@ -10,6 +10,9 @@
  "dropped_lane_events": [
   13.3
  ],
+ "bounces": [
+  30.57
+ ],
  "player_frames": 348,
  "card_text": "x2collect3icolnscore20000collect200doublerscoine",
  "card_state": [
@@ -201,12 +204,12 @@
    "duration_ms": 40
   },
   {
-   "t": 30.45,
-   "action": "jump",
+   "t": 30.447,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

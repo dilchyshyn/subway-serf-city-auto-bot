@@ -12,6 +12,11 @@
   4.13,
   17.8
  ],
+ "bounces": [
+  8.77,
+  9.43,
+  10.9
+ ],
  "player_frames": 391,
  "card_text": "stompon9score28000collecnb0buriedoaohoscoing",
  "card_state": [
@@ -95,12 +100,21 @@
    "duration_ms": 40
   },
   {
-   "t": 8.85,
-   "action": "jump",
+   "t": 8.646,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.313,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -128,6 +142,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 10.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

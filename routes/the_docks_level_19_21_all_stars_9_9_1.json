@@ -11,6 +11,12 @@
   5.0,
   42.47
  ],
+ "bounces": [
+  20.6,
+  24.7,
+  26.03,
+  30.93
+ ],
  "player_frames": 555,
  "card_text": "stomponllscore2ooooridoboardforburiodoadhos20000onds",
  "card_state": [
@@ -157,6 +163,15 @@
    "duration_ms": 40
   },
   {
+   "t": 20.48,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 22.15,
    "action": "jump",
    "x1": 0.5,
@@ -175,6 +190,15 @@
    "duration_ms": 40
   },
   {
+   "t": 24.58,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 25.067,
    "action": "left",
    "x1": 0.5,
@@ -190,6 +214,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 25.914,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -217,6 +250,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 30.814,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

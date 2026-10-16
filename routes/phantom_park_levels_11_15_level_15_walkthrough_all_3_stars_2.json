@@ -15,6 +15,11 @@
   21.2,
   28.8
  ],
+ "bounces": [
+  9.8,
+  33.97,
+  36.6
+ ],
  "player_frames": 351,
  "card_text": "stompon8scoro75000colloct3burledcachestrophles",
  "card_state": [
@@ -41,6 +46,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.68,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -203,6 +217,24 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 33.846,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 36.48,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -10,6 +10,9 @@
  "dropped_lane_events": [
   15.23
  ],
+ "bounces": [
+  8.53
+ ],
  "player_frames": 89,
  "card_text": "colloct180score17900colloct3coinsmegnots",
  "card_state": [
@@ -36,6 +39,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.414,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

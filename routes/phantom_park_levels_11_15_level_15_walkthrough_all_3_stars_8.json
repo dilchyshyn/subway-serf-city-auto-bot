@@ -16,6 +16,10 @@
   31.93,
   33.9
  ],
+ "bounces": [
+  3.03,
+  42.2
+ ],
  "player_frames": 376,
  "card_text": "pop13loxloscore68000colloct3bubblostrophies",
  "card_state": [
@@ -26,6 +30,15 @@
  "card": "cards/phantom_park_levels_11_15_level_15_walkthrough_all_3_stars_8.jpg",
  "crew": "crew/phantom_park_levels_11_15_level_15_walkthrough_all_3_stars_8.jpg",
  "gestures": [
+  {
+   "t": 2.914,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
   {
    "t": 4.284,
    "action": "jump",
@@ -276,6 +289,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 42.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -10,6 +10,12 @@
  "dropped_lane_events": [
   29.2
  ],
+ "bounces": [
+  18.87,
+  29.2,
+  31.7,
+  35.33
+ ],
  "player_frames": 393,
  "card_text": "stonponggooro15000collootidqbouncytarpscoins",
  "card_state": [
@@ -210,6 +216,15 @@
    "duration_ms": 40
   },
   {
+   "t": 18.747,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 19.4,
    "action": "right",
    "x1": 0.5,
@@ -264,6 +279,15 @@
    "duration_ms": 40
   },
   {
+   "t": 29.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 30.917,
    "action": "jump",
    "x1": 0.5,
@@ -273,12 +297,30 @@
    "duration_ms": 40
   },
   {
+   "t": 31.58,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 33.317,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 35.213,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

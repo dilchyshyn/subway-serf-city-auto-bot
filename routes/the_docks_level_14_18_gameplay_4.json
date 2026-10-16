@@ -12,6 +12,9 @@
   11.07,
   41.03
  ],
+ "bounces": [
+  11.7
+ ],
  "player_frames": 527,
  "card_text": "triggor12scoreb500stoamvontscoins",
  "card_state": [
@@ -86,12 +89,12 @@
    "duration_ms": 40
   },
   {
-   "t": 11.583,
-   "action": "jump",
+   "t": 11.58,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

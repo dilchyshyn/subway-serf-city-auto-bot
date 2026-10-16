@@ -12,6 +12,9 @@
   37.83,
   44.9
  ],
+ "bounces": [
+  6.37
+ ],
  "player_frames": 344,
  "card_text": "triggor10scoro12650pop12toxiobubblos",
  "card_state": [
@@ -68,12 +71,12 @@
    "duration_ms": 40
   },
   {
-   "t": 6.35,
-   "action": "jump",
+   "t": 6.247,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

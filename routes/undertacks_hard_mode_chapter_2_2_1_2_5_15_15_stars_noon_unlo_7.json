@@ -8,6 +8,9 @@
   418.83
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  2.5
+ ],
  "player_frames": 360,
  "card_text": "x2collect3colnscore40000jumpnomoredoublorsthan2timos",
  "card_state": [
@@ -18,6 +21,15 @@
  "card": "cards/undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_7.jpg",
  "crew": "crew/undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_7.jpg",
  "gestures": [
+  {
+   "t": 2.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
   {
    "t": 3.5,
    "action": "right",

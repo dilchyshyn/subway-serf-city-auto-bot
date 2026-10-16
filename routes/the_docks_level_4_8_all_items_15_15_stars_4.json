@@ -10,6 +10,9 @@
  "dropped_lane_events": [
   24.13
  ],
+ "bounces": [
+  5.37
+ ],
  "player_frames": 580,
  "card_text": "collect180sooreb500collectbicolncoins",
  "card_state": [
@@ -30,12 +33,12 @@
    "duration_ms": 40
   },
   {
-   "t": 5.583,
-   "action": "jump",
+   "t": 5.247,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

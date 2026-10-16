@@ -12,6 +12,9 @@
   7.6,
   15.87
  ],
+ "bounces": [
+  17.87
+ ],
  "player_frames": 173,
  "card_text": "intoractwithscoro15000jumpnomorohurdlosthan2timos",
  "card_state": [
@@ -131,12 +134,12 @@
    "duration_ms": 40
   },
   {
-   "t": 17.983,
-   "action": "jump",
+   "t": 17.747,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   }
  ]

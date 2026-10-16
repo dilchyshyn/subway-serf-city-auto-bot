@@ -13,6 +13,11 @@
   13.17,
   18.97
  ],
+ "bounces": [
+  28.87,
+  31.3,
+  35.0
+ ],
  "player_frames": 346,
  "card_text": "stompon8scoro24000jumpnomoreburiododohosthan4timoo",
  "card_state": [
@@ -168,6 +173,15 @@
    "duration_ms": 40
   },
   {
+   "t": 28.747,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 30.017,
    "action": "jump",
    "x1": 0.5,
@@ -186,6 +200,15 @@
    "duration_ms": 40
   },
   {
+   "t": 31.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 31.967,
    "action": "right",
    "x1": 0.5,
@@ -201,6 +224,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 34.88,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

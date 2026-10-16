@@ -13,6 +13,9 @@
   17.47,
   44.07
  ],
+ "bounces": [
+  43.07
+ ],
  "player_frames": 401,
  "card_text": "stompon7scoro1booocolloctcoinbounoytarpssacks",
  "card_state": [
@@ -228,6 +231,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 42.946,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

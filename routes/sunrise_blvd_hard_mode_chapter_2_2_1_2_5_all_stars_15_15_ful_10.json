@@ -11,6 +11,10 @@
   3.7,
   39.53
  ],
+ "bounces": [
+  6.93,
+  42.37
+ ],
  "player_frames": 515,
  "card_text": "srisercrab10droneagoore9000leloractwhhihurded",
  "card_state": [
@@ -49,12 +53,12 @@
    "duration_ms": 40
   },
   {
-   "t": 6.783,
-   "action": "jump",
+   "t": 6.813,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -271,6 +275,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 42.246,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

@@ -11,6 +11,9 @@
   2.27,
   14.13
  ],
+ "bounces": [
+  0.5
+ ],
  "player_frames": 123,
  "card_text": "collecf280soore21700colloct3coinsmagnots",
  "card_state": [
@@ -21,6 +24,15 @@
  "card": "cards/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_13.jpg",
  "crew": "crew/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_13.jpg",
  "gestures": [
+  {
+   "t": 0.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
   {
    "t": 0.8,
    "action": "roll",

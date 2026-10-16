@@ -11,6 +11,10 @@
   6.7,
   30.97
  ],
+ "bounces": [
+  16.17,
+  28.07
+ ],
  "player_frames": 695,
  "card_text": "collect120score23000stomponcoinsbounoytarps",
  "card_state": [
@@ -121,6 +125,15 @@
    "duration_ms": 40
   },
   {
+   "t": 16.047,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 18.5,
    "action": "right",
    "x1": 0.5,
@@ -211,12 +224,12 @@
    "duration_ms": 40
   },
   {
-   "t": 28.283,
-   "action": "jump",
+   "t": 27.947,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

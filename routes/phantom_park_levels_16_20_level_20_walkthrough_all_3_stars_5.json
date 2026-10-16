@@ -12,6 +12,10 @@
   26.4,
   28.2
  ],
+ "bounces": [
+  2.63,
+  14.5
+ ],
  "player_frames": 346,
  "card_text": "19poploloxios5032000colloalpgo",
  "card_state": [
@@ -29,6 +33,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 2.513,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -92,6 +105,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 14.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

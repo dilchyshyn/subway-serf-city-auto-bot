@@ -10,6 +10,11 @@
  "dropped_lane_events": [
   33.57
  ],
+ "bounces": [
+  24.13,
+  30.97,
+  41.5
+ ],
  "player_frames": 344,
  "card_text": "triggor15score19500collect4coinvontsdoublors",
  "card_state": [
@@ -192,6 +197,15 @@
    "duration_ms": 40
   },
   {
+   "t": 24.014,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 26.417,
    "action": "jump",
    "x1": 0.5,
@@ -225,6 +239,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 30.847,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -288,6 +311,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 41.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

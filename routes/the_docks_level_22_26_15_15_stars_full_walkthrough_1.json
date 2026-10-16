@@ -11,6 +11,10 @@
   30.67,
   40.33
  ],
+ "bounces": [
+  6.47,
+  44.77
+ ],
  "player_frames": 526,
  "card_text": "colleci12colnstompon3bariodooohos",
  "card_state": [
@@ -64,6 +68,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.347,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -424,6 +437,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 44.647,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

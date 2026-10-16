@@ -11,6 +11,9 @@
   6.5,
   28.47
  ],
+ "bounces": [
+  28.9
+ ],
  "player_frames": 312,
  "card_text": "snrisercrabbdroneescore30000colecl3irophles",
  "card_state": [
@@ -100,6 +103,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 28.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

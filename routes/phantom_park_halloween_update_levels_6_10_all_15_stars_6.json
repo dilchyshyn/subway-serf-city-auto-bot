@@ -10,6 +10,10 @@
  "dropped_lane_events": [
   34.8
  ],
+ "bounces": [
+  6.53,
+  29.8
+ ],
  "player_frames": 285,
  "card_text": "pop14toxicscoro27100colleciiocoinbubblossacks",
  "card_state": [
@@ -45,6 +49,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.413,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -189,6 +202,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 29.68,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

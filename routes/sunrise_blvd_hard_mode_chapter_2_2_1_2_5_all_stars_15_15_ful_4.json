@@ -13,6 +13,9 @@
   12.43,
   35.1
  ],
+ "bounces": [
+  11.2
+ ],
  "player_frames": 375,
  "card_text": "sinriserorab7doneso0ro16000lerootwhho",
  "card_state": [
@@ -138,6 +141,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.08,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

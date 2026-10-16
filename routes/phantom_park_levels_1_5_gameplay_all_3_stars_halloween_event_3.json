@@ -12,6 +12,13 @@
   27.53,
   41.6
  ],
+ "bounces": [
+  18.3,
+  29.8,
+  38.5,
+  41.87,
+  46.57
+ ],
  "player_frames": 348,
  "card_text": "colloct3score33800stompon10bubblegumsburledcachos",
  "card_state": [
@@ -167,6 +174,15 @@
    "duration_ms": 40
   },
   {
+   "t": 18.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 18.95,
    "action": "jump",
    "x1": 0.5,
@@ -239,6 +255,15 @@
    "duration_ms": 40
   },
   {
+   "t": 29.68,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 30.55,
    "action": "jump",
    "x1": 0.5,
@@ -293,6 +318,15 @@
    "duration_ms": 40
   },
   {
+   "t": 38.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 39.534,
    "action": "right",
    "x1": 0.5,
@@ -317,6 +351,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 41.747,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -356,12 +399,12 @@
    "duration_ms": 40
   },
   {
-   "t": 46.55,
-   "action": "jump",
+   "t": 46.447,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   }
  ]

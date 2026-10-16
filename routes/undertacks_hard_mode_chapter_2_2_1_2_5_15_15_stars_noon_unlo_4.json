@@ -12,6 +12,10 @@
   24.83,
   30.2
  ],
+ "bounces": [
+  7.5,
+  27.2
+ ],
  "player_frames": 310,
  "card_text": "triggorbstoamscor042000colloct3vontsfrophles",
  "card_state": [
@@ -56,6 +60,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.38,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -140,12 +153,12 @@
    "duration_ms": 40
   },
   {
-   "t": 27.383,
-   "action": "jump",
+   "t": 27.08,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

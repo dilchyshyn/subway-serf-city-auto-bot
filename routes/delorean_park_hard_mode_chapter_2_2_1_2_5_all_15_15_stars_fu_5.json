@@ -11,6 +11,13 @@
   3.37,
   9.1
  ],
+ "bounces": [
+  11.03,
+  17.03,
+  20.3,
+  33.4,
+  34.53
+ ],
  "player_frames": 480,
  "card_text": "bubblogumscolloctsoor045000colloct3trophies",
  "card_state": [
@@ -112,6 +119,15 @@
    "duration_ms": 40
   },
   {
+   "t": 10.914,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 11.3,
    "action": "left",
    "x1": 0.5,
@@ -175,12 +191,30 @@
    "duration_ms": 40
   },
   {
+   "t": 16.914,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 19.317,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 20.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -298,6 +332,24 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 33.28,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 34.414,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

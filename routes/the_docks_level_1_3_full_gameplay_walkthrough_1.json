@@ -10,6 +10,13 @@
  "dropped_lane_events": [
   28.27
  ],
+ "bounces": [
+  20.57,
+  27.23,
+  28.23,
+  30.8,
+  34.33
+ ],
  "player_frames": 586,
  "card_text": "stomponcolloor70burledoachoacoins",
  "card_state": [
@@ -210,6 +217,15 @@
    "duration_ms": 40
   },
   {
+   "t": 20.446,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 22.116,
    "action": "jump",
    "x1": 0.5,
@@ -246,12 +262,21 @@
    "duration_ms": 40
   },
   {
-   "t": 27.383,
-   "action": "jump",
+   "t": 27.113,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 28.113,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -261,6 +286,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 30.68,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -279,6 +313,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 34.213,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

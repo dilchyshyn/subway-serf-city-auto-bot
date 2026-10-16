@@ -10,6 +10,10 @@
  "dropped_lane_events": [
   20.6
  ],
+ "bounces": [
+  10.33,
+  30.53
+ ],
  "player_frames": 146,
  "card_text": "pop13100trophlco",
  "card_state": [
@@ -45,6 +49,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 10.213,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -180,6 +193,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 30.413,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

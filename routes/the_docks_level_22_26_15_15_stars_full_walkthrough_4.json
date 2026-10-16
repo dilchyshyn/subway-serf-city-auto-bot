@@ -11,6 +11,10 @@
   7.7,
   23.4
  ],
+ "bounces": [
+  8.87,
+  12.97
+ ],
  "player_frames": 545,
  "card_text": "sedock13collect5coinsoo4000jupnomore",
  "card_state": [
@@ -76,6 +80,15 @@
    "duration_ms": 40
   },
   {
+   "t": 8.746,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 8.966,
    "action": "right",
    "x1": 0.5,
@@ -91,6 +104,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.846,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

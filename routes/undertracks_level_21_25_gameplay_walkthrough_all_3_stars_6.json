@@ -13,6 +13,10 @@
   15.33,
   22.7
  ],
+ "bounces": [
+  19.7,
+  31.33
+ ],
  "player_frames": 132,
  "card_text": "colloct180score30900stompon10coinsburiodcaohosuforlovots",
  "card_state": [
@@ -114,12 +118,12 @@
    "duration_ms": 40
   },
   {
-   "t": 19.65,
-   "action": "jump",
+   "t": 19.58,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -147,6 +151,15 @@
    "y1": 0.6,
    "x2": 0.25,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 31.214,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

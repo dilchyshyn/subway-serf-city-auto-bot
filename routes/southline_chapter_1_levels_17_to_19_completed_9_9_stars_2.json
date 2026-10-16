@@ -8,6 +8,10 @@
   99.03
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  12.23,
+  23.27
+ ],
  "player_frames": 416,
  "card_text": "rollnomorescoroooocollect90than8timoscoins",
  "card_state": [
@@ -91,6 +95,15 @@
    "duration_ms": 40
   },
   {
+   "t": 12.113,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 14.75,
    "action": "jump",
    "x1": 0.5,
@@ -163,12 +176,12 @@
    "duration_ms": 40
   },
   {
-   "t": 23.15,
-   "action": "jump",
+   "t": 23.147,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

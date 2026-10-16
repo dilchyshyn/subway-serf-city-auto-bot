@@ -8,6 +8,10 @@
   203.97
  ],
  "dropped_lane_events": [],
+ "bounces": [
+  0.83,
+  6.77
+ ],
  "player_frames": 157,
  "card_text": "collecfbcolnsco4600slompon7sacksburiodaaohonreoommondodsunferlovot6",
  "card_state": [
@@ -18,6 +22,24 @@
  "card": "cards/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_5.jpg",
  "crew": "crew/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_5.jpg",
  "gestures": [
+  {
+   "t": 0.714,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.647,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
   {
    "t": 7.184,
    "action": "jump",

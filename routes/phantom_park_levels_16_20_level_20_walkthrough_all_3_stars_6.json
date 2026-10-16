@@ -16,6 +16,11 @@
   42.83,
   46.97
  ],
+ "bounces": [
+  4.13,
+  32.67,
+  45.4
+ ],
  "player_frames": 312,
  "card_text": "stompon13scoro148400colloct3burledcaohestrophios",
  "card_state": [
@@ -33,6 +38,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.014,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -189,6 +203,15 @@
    "duration_ms": 40
   },
   {
+   "t": 32.547,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 34.084,
    "action": "jump",
    "x1": 0.5,
@@ -276,6 +299,15 @@
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 45.28,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

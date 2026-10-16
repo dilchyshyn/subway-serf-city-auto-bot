@@ -10,6 +10,9 @@
  "dropped_lane_events": [
   5.37
  ],
+ "bounces": [
+  38.6
+ ],
  "player_frames": 600,
  "card_text": "jumpnomoreintoractwhurdsbooro12500than21imes",
  "card_state": [
@@ -216,6 +219,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 38.48,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

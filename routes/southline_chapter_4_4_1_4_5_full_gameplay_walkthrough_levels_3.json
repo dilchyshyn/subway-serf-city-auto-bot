@@ -10,6 +10,12 @@
  "dropped_lane_events": [
   42.73
  ],
+ "bounces": [
+  15.57,
+  28.0,
+  34.1,
+  36.3
+ ],
  "player_frames": 544,
  "card_text": "e37m20g43scburiedoechosmompont2coore20000collectelrophiea",
  "card_state": [
@@ -81,6 +87,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 15.447,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -156,6 +171,15 @@
    "duration_ms": 40
   },
   {
+   "t": 27.88,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 30.317,
    "action": "jump",
    "x1": 0.5,
@@ -201,12 +225,12 @@
    "duration_ms": 40
   },
   {
-   "t": 34.183,
-   "action": "jump",
+   "t": 33.98,
+   "action": "roll",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
-   "y2": 0.35,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -216,6 +240,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 36.18,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {

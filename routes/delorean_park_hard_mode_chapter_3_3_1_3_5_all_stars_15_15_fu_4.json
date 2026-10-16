@@ -10,6 +10,11 @@
  "dropped_lane_events": [
   15.63
  ],
+ "bounces": [
+  8.9,
+  9.77,
+  12.9
+ ],
  "player_frames": 404,
  "card_text": "intereotwithgsoor3o00chungolangnohurdlonmorothansimes",
  "card_state": [
@@ -93,12 +98,30 @@
    "duration_ms": 40
   },
   {
+   "t": 8.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
    "t": 9.6,
    "action": "right",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.75,
    "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.646,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
@@ -117,6 +140,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.78,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
    "duration_ms": 40
   },
   {
