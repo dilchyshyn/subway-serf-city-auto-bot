@@ -1,0 +1,204 @@
+{
+ "level": "southline_level_28_32_15_15_stars_completed_4",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=3fDyZvcnAS4",
+ "title": "Southline level 28 - 32 Subway Surfers City | 15/15 Stars Completed ⭐",
+ "run": [
+  213.67,
+  243.3
+ ],
+ "dropped_lane_events": [
+  14.83
+ ],
+ "player_frames": 347,
+ "card_text": "jumpnomorescoro120oointoractwith5than4timoohurdlos",
+ "card_state": [
+  1,
+  1,
+  0
+ ],
+ "card": "cards/southline_level_28_32_15_15_stars_completed_4.jpg",
+ "crew": "crew/southline_level_28_32_15_15_stars_completed_4.jpg",
+ "gestures": [
+  {
+   "t": 0.033,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 0.383,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 2.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.766,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.6,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 5.183,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.466,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.666,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.116,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.25,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.1,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 13.1,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 13.25,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 16.933,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 18.133,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 19.316,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 21.333,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 22.766,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 23.833,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  }
+ ]
+}

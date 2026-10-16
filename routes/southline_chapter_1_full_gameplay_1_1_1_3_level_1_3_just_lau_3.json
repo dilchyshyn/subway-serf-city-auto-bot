@@ -1,0 +1,366 @@
+{
+ "level": "southline_chapter_1_full_gameplay_1_1_1_3_level_1_3_just_lau_3",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=9nJQ52Llqoc",
+ "title": "Subway Surfers City – Southline Chapter 1 Full Gameplay (1.1–1.3) level 1-3 | Just Launched",
+ "run": [
+  132.97,
+  184.83
+ ],
+ "dropped_lane_events": [
+  23.97
+ ],
+ "player_frames": 623,
+ "card_text": "bubblogunscolect4score5000collesr2rophies",
+ "card_state": [
+  0,
+  0,
+  0
+ ],
+ "card": "cards/southline_chapter_1_full_gameplay_1_1_1_3_level_1_3_just_lau_3.jpg",
+ "crew": "crew/southline_chapter_1_full_gameplay_1_1_1_3_level_1_3_just_lau_3.jpg",
+ "gestures": [
+  {
+   "t": 4.35,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.533,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 5.216,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 5.266,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.15,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.7,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.7,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.15,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 10.166,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.55,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 13.816,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 15.75,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 16.633,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 17.533,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 19.683,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 22.016,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 23.35,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 25.466,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 26.75,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 28.95,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 29.883,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 30.366,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 31.233,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 31.683,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 32.083,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 34.5,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 35.833,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 37.733,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 38.95,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 41.283,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 42.866,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 43.083,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 43.683,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 44.883,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 46.166,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 48.4,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 49.15,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 51.166,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  }
+ ]
+}

@@ -1,0 +1,254 @@
+{
+ "level": "sunrise_blvd_hard_mode_chapter_1_1_1_1_3_all_9_9_stars_1",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=KcrlnGTqyFI",
+ "title": "Sunrise Blvd HARD MODE Chapter 1 (1.1–1.3) ALL 9/9 Stars ⭐⭐⭐ | Subway Surfers City",
+ "run": [
+  10.27,
+  58.5
+ ],
+ "dropped_lane_events": [
+  6.03,
+  21.03,
+  25.93,
+  31.83,
+  36.37
+ ],
+ "player_frames": 421,
+ "gestures": [
+  {
+   "t": 5.383,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 5.633,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.65,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.366,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.316,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 13.25,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 15.316,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 17.05,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 17.7,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 18.716,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 19.983,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 22.05,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 24.0,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 25.25,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 28.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 29.65,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 32.716,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 35.183,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 37.65,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 40.25,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 41.033,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 42.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 45.516,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 45.733,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 48.05,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

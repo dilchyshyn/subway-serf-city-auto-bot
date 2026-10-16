@@ -1,0 +1,31 @@
+{
+ "level": "undertracks_level_26_29_gameplay_walkthrough_2",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=J3VysZnr-NY",
+ "title": "Subway Surfers City | Undertracks Level 26–29 Gameplay Walkthrough ⭐ ",
+ "run": [
+  36.0,
+  41.27
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 37,
+ "card_text": "colloct180score17900colloct3coinsmegnots",
+ "card_state": [
+  0,
+  0,
+  0
+ ],
+ "card": "cards/undertracks_level_26_29_gameplay_walkthrough_2.jpg",
+ "crew": "crew/undertracks_level_26_29_gameplay_walkthrough_2.jpg",
+ "gestures": [
+  {
+   "t": 0.633,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  }
+ ]
+}

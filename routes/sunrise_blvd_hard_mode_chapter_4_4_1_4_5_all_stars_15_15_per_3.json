@@ -1,0 +1,130 @@
+{
+ "level": "sunrise_blvd_hard_mode_chapter_4_4_1_4_5_all_stars_15_15_per_3",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=K8r1teF_LoE",
+ "title": "Subway Surfers City | Sunrise Blvd HARD MODE Chapter 4 (4.1–4.5) All Stars ⭐ 15/15 Perfect Run",
+ "run": [
+  152.4,
+  191.4
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 215,
+ "card_text": "x2grabzdronesscore210o0collect3icolndoublorsrecomnendodsunferlovot9",
+ "card_state": [
+  0,
+  0,
+  0
+ ],
+ "card": "cards/sunrise_blvd_hard_mode_chapter_4_4_1_4_5_all_stars_15_15_per_3.jpg",
+ "crew": "crew/sunrise_blvd_hard_mode_chapter_4_4_1_4_5_all_stars_15_15_per_3.jpg",
+ "gestures": [
+  {
+   "t": 4.583,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.633,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 10.4,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 10.5,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.367,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 15.3,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 15.917,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 20.517,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 21.783,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 23.85,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 26.983,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 29.983,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

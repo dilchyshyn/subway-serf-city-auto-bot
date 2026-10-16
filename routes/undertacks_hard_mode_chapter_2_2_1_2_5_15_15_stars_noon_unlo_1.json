@@ -1,0 +1,87 @@
+{
+ "level": "undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_1",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=aPVi4LTlzD0",
+ "title": "Subway Surfers City | Undertacks HARD MODE Chapter 2 (2.1–2.5) 🔥 15/15 Stars + Noon Unlocked",
+ "run": [
+  13.63,
+  25.2
+ ],
+ "dropped_lane_events": [
+  0.97
+ ],
+ "player_frames": 118,
+ "card_text": "rideboardforscoro44000stompon545socondsburledoaohos",
+ "card_state": [
+  0,
+  0,
+  0
+ ],
+ "card": "cards/undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_1.jpg",
+ "crew": "crew/undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_1.jpg",
+ "gestures": [
+  {
+   "t": 1.417,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 1.884,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.217,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.234,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.084,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.15,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.417,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

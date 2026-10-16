@@ -1,0 +1,49 @@
+{
+ "level": "undertracks_level_21_25_gameplay_walkthrough_all_3_stars_8",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=bDnToi5zOSM",
+ "title": "Subway Surfers City | Undertracks Level 21–25 Gameplay Walkthrough ⭐ All 3 Stars",
+ "run": [
+  362.57,
+  376.0
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 20,
+ "card_text": "coloct180score30900stompon10colnsburlodoadhos",
+ "card_state": [
+  0,
+  0,
+  0
+ ],
+ "card": "cards/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_8.jpg",
+ "crew": "crew/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_8.jpg",
+ "gestures": [
+  {
+   "t": 4.016,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.683,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.083,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "level": "undertracks_level_30_33_gameplay_walkthrough_all_3_stars_6",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=O743WIN2kXo",
+ "title": "Subway Surfers City | Undertracks Level 30–33 Gameplay Walkthrough ⭐ All 3 Stars",
+ "run": [
+  433.53,
+  448.7
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 55,
+ "card_text": "inleractwithl0sco1e20800charsgolanenohurdlosmorothan7",
+ "card_state": [
+  1,
+  1,
+  0
+ ],
+ "card": "cards/undertracks_level_30_33_gameplay_walkthrough_all_3_stars_6.jpg",
+ "crew": "crew/undertracks_level_30_33_gameplay_walkthrough_all_3_stars_6.jpg",
+ "gestures": [
+  {
+   "t": 0.367,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 0.517,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.5,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.233,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.833,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 5.117,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.433,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.45,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.117,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

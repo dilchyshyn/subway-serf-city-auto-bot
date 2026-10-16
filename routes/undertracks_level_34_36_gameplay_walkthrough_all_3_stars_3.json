@@ -1,0 +1,58 @@
+{
+ "level": "undertracks_level_34_36_gameplay_walkthrough_all_3_stars_3",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=ANGkruIGg10",
+ "title": "Subway Surfers City | Undertracks Level 34–36 Gameplay Walkthrough ⭐ All 3 Stars",
+ "run": [
+  89.47,
+  108.0
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 45,
+ "card_text": "3429500ridoboardforsoceoondsad",
+ "card_state": [
+  0,
+  0,
+  1
+ ],
+ "card": "cards/undertracks_level_34_36_gameplay_walkthrough_all_3_stars_3.jpg",
+ "crew": "crew/undertracks_level_34_36_gameplay_walkthrough_all_3_stars_3.jpg",
+ "gestures": [
+  {
+   "t": 6.716,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.2,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.833,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 8.25,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

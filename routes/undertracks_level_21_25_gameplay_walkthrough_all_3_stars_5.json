@@ -1,0 +1,94 @@
+{
+ "level": "undertracks_level_21_25_gameplay_walkthrough_all_3_stars_5",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=bDnToi5zOSM",
+ "title": "Subway Surfers City | Undertracks Level 21–25 Gameplay Walkthrough ⭐ All 3 Stars",
+ "run": [
+  178.13,
+  203.97
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 157,
+ "card_text": "collecfbcolnsco4600slompon7sacksburiodaaohonreoommondodsunferlovot6",
+ "card_state": [
+  0,
+  1,
+  0
+ ],
+ "card": "cards/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_5.jpg",
+ "crew": "crew/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_5.jpg",
+ "gestures": [
+  {
+   "t": 7.184,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 12.667,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 13.434,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 14.7,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 16.734,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 18.85,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 21.034,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 25.384,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  }
+ ]
+}

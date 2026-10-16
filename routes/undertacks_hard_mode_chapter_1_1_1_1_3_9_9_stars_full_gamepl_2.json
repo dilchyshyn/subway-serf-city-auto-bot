@@ -1,0 +1,32 @@
+{
+ "level": "undertacks_hard_mode_chapter_1_1_1_1_3_9_9_stars_full_gamepl_2",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=6N_YnosXIxc",
+ "title": "Subway Surfers City | Undertacks HARD MODE Chapter 1 (1.1–1.3) 🔥 9/9 Stars Full Gameplay",
+ "run": [
+  113.13,
+  119.3
+ ],
+ "dropped_lane_events": [],
+ "player_frames": 74,
+ "gestures": [
+  {
+   "t": 1.584,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 4.167,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  }
+ ]
+}
