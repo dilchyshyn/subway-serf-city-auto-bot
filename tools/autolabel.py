@@ -36,7 +36,8 @@ def yolo_line(d, w, h):
 
 
 def write_data_yaml(out):
-    lines = [f"path: {out.resolve()}", "train: images/train", "val: images/val", "names:"]
+    # без "path": ultralytics бере папку, де лежить data.yaml, тож датасет переносний (Colab, Roboflow)
+    lines = ["train: images/train", "val: images/val", "names:"]
     lines += [f"  {i}: {name}" for i, name in enumerate(CLASSES)]
     (out / "data.yaml").write_text("\n".join(lines) + "\n", encoding="utf-8")
     (out / "classes.txt").write_text("\n".join(CLASSES) + "\n", encoding="utf-8")
