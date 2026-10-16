@@ -14,7 +14,7 @@ import cv2
 
 from . import route, video
 
-SAME_LEVEL = 0.65  # подібність тексту завдань, з якої це той самий рівень
+SAME_LEVEL = 0.55  # подібність тексту завдань, з якої це той самий рівень
 MIN_COMMON_NUMBERS = 2  # для впевненого збігу потрібні щонайменше 2 однакові числа завдань
 
 
@@ -70,16 +70,19 @@ class RouteLibrary:
                         key=lambda x: x[0], reverse=True)
         if not scored:
             return None
-        best = scored[0][0]
-        same = [e for s, e in scored if s >= max(SAME_LEVEL, best - 0.1)]
+        best, top = scored[0]
+        # спроби того самого рівня: схожі на найкращий маршрут і майже так само схожі на картку
+        same = [e for s, e in scored if s >= best - 0.1 and video.text_similarity(e.text, top.text) >= SAME_LEVEL]
+        if top not in same:
+            same.insert(0, top)
         others = [s for s, e in scored if e not in same]
         margin = best - (others[0] if others else 0.0)
         # спроба з тим самим станом; інакше — з найбільшим збігом виконаних завдань,
         # серед рівних — найраніша у відео (назви маршрутів закінчуються номером забігу)
-        attempts = sorted(same or [scored[0][1]], key=lambda e: e.path.name)
+        attempts = sorted(same, key=lambda e: e.path.name)
         pick = max(enumerate(attempts),
                    key=lambda ie: (ie[1].state == state, sum(a == b for a, b in zip(ie[1].state, state)), -ie[0]))[1]
-        return Match(pick.path, pick.name, best, margin, video.common_numbers(text, scored[0][1].text),
+        return Match(pick.path, pick.name, best, margin, video.common_numbers(text, top.text),
                      state, pick.crew)
 
     def match(self, frame):

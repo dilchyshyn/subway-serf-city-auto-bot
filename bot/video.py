@@ -241,14 +241,15 @@ def is_level_card_text(text):
 
 def _numbers(s):
     """Множина чисел з тексту OCR. Літери, які OCR плутає з цифрами, поруч із
-    цифрою читаються як цифри: 16ooo → 16000, pop1g → 19, b8000 → 88000."""
+    цифрою читаються як цифри: 16ooo → 16000, pop1g → 19, b8000 → 88000,
+    triggeri0 → trigger10 (у шрифті гри «1» схожа на «I»)."""
     import re
-    fix = {"o": "0", "g": "9", "b": "8"}
+    fix = {"o": "0", "g": "9", "b": "8", "i": "1", "l": "1"}
     prev = None
     while prev != s:
         prev = s
-        s = re.sub(r"(?<=\d)[og]|[ob](?=\d)", lambda m: fix[m.group()], s)
-    return {n for n in re.findall(r"\d+", s) if int(n) > 0}
+        s = re.sub(r"(?<=\d)[og]|[obil](?=\d)", lambda m: fix[m.group()], s)
+    return {str(int(n)) for n in re.findall(r"\d+", s) if int(n) > 0}  # «scoro12650» → 012650 → 12650
 
 
 def common_numbers(a, b):

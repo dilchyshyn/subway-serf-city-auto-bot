@@ -412,6 +412,15 @@ class CardTextTest(unittest.TestCase):
         self.assertEqual(common_numbers(live, other), 0)
         self.assertLess(text_similarity(live, other), 0.4)
 
+    def test_phone_ocr_reads_one_as_i(self):
+        # справжня картка Phantom Park 3 з телефона проти маршруту з відео
+        from bot.video import common_numbers, text_similarity
+        from bot.library import SAME_LEVEL
+        phone = "triggeri0scorei2650pop2toxicbubblessteamvents"
+        video_route = "triggor10scoro12650pop12toxiobubblos"
+        self.assertGreaterEqual(common_numbers(phone, video_route), 2)
+        self.assertGreaterEqual(text_similarity(phone, video_route), SAME_LEVEL)
+
     def test_card_state_reads_green_rings(self):
         from bot.video import card_state
         band = np.full((120, 300, 3), (120, 60, 20), np.uint8)       # синя картка
