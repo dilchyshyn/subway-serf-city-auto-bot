@@ -109,8 +109,35 @@ def analyse_cached(path, detector, det_every):
     return times, hud, shifts, boxes, cards
 
 
+def bounces_cached(path):
+    """Рожевість кадру для пошуку відскоків на Bubblegum; окремий кеш, без детектора."""
+    cache = Path(path).with_suffix(".bounce.npz")
+    if cache.exists():
+        d = np.load(cache)
+        return d["times"], d["ratios"]
+    times, ratios = [], []
+    with av.open(str(path)) as container:
+        for frame in container.decode(video=0):
+            if frame.time is not None:
+                times.append(frame.time)
+                ratios.append(video.magenta_ratio(frame.to_ndarray(format="bgr24")))
+    np.savez_compressed(cache, times=np.array(times), ratios=np.array(ratios))
+    return np.array(times), np.array(ratios)
+
+
+def apply_bounces(gestures, bounces, cfg, lead=0.12):
+    """Свайп униз перед кожним відскоком; «стрибок» одразу після спалаху — це сам відскік."""
+    out = [g for g in gestures
+           if not (g.action == "jump" and any(-0.15 <= g.t - b <= 0.25 for b in bounces))]
+    for b in bounces:
+        if not any(g.action == "roll" and abs(g.t - (b - lead)) < 0.3 for g in out):
+            out.append(route._swipe("roll", b - lead, cfg["swipe"]))
+    return sorted(out, key=lambda g: g.t)
+
+
 def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
     times, hud, shifts, boxes, cards = analyse_cached(path, detector, det_every)
+    b_times, b_ratios = bounces_cached(path)
     runs = video.segment_runs(times, hud)
     with av.open(str(path)) as c:
         width = c.streams.video[0].width
@@ -126,7 +153,9 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
                                              stomp_max_air=cfg["video"]["stomp_max_air"],
                                              stomp_fall=cfg["video"]["stomp_fall"],
                                              stomp_shrink=cfg["video"]["stomp_shrink"])
-        gestures.sort(key=lambda g: g.t)
+        sel_b = (b_times >= t0) & (b_times <= t1)
+        bounces = [t - t0 for t in video.bounce_times(list(b_times[sel_b]), list(b_ratios[sel_b]))]
+        gestures = apply_bounces(gestures, bounces, cfg)
 
         name = f"{slug(title)}_{k + 1}"
         card, card_text = None, None
@@ -141,6 +170,7 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
                 break
         meta = {"source": source, "title": title, "run": [round(t0, 2), round(t1, 2)],
                 "dropped_lane_events": [round(t - t0, 2) for t in dropped],
+                "bounces": [round(t, 2) for t in bounces],
                 "player_frames": len(track)}
         if card:
             _, img, play = card

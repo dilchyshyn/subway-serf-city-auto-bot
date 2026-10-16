@@ -287,3 +287,25 @@ def card_state(band):
     hsv = cv2.cvtColor(band[: int(0.7 * h)], cv2.COLOR_BGR2HSV)
     green = cv2.inRange(hsv, (40, 110, 110), (85, 255, 255))
     return tuple(int(green[:, int(k * w / 3):int((k + 1) * w / 3)].mean() / 255 > 0.04) for k in range(3))
+
+
+# ---------- відскік на Bubblegum ----------
+# Свайп униз у стрибку з Bubblegum дає різкий рожевий спалах навколо персонажа
+# і відскік угору. Рожевого в City багато (бульбашки, Phantom Park), але воно
+# наростає поступово, а спалах — за 0,1 с.
+
+def magenta_ratio(frame):
+    h, w = frame.shape[:2]
+    hsv = cv2.cvtColor(frame[int(0.2 * h):int(0.9 * h), int(0.15 * w):int(0.85 * w)], cv2.COLOR_BGR2HSV)
+    return cv2.inRange(hsv, (140, 90, 170), (172, 255, 255)).mean() / 255
+
+
+def bounce_times(times, ratios, jump=0.12, window=0.1, refractory=0.6):
+    """Моменти різкого рожевого спалаху (приріст ≥ jump за window секунд)."""
+    out, j = [], 0
+    for i, (t, r) in enumerate(zip(times, ratios)):
+        while times[j] < t - window:
+            j += 1
+        if r - min(ratios[j:i + 1]) >= jump and (not out or t - out[-1] > refractory):
+            out.append(t)
+    return out
