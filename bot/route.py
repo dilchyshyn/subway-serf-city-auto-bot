@@ -173,8 +173,9 @@ def _swipe(action, t, swipe_cfg):
                    swipe_cfg["duration_ms"])
 
 
-def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, roll_shrink=0.7,
-                       snap=0.3, lanes=True, stomp_max_air=None, jumps_log=None):
+def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.08, roll_shrink=0.7,
+                       snap=0.3, lanes=True, stomp_max_air=None, stomp_fall=3.0, stomp_shrink=0.6,
+                       ground_window=1.5, jumps_log=None):
     """Відновлює свайпи з траєкторії персонажа у відео.
 
     track — список (t, (x1, y1, x2, y2) у частках кадру або None, якщо персонажа не видно).
@@ -184,8 +185,9 @@ def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, ro
     lead віднімається від моменту, коли рух помітно на кадрі: свайп був трохи раніше.
     lanes=False — лише стрибки й пірнання (у City смуги надійніше визначати за
     зсувом рейок, див. bot/video.py, бо камера йде за персонажем вбік).
-    stomp_max_air — якщо персонаж приземлився швидше за стільки секунд після
-    стрибка, це був stomp (свайп униз у повітрі): додаємо "roll" перед падінням.
+    stomp_max_air — stomp (свайп униз у повітрі) визнається, лише якщо політ
+    коротший за стільки секунд І падіння різке (stomp_fall, частки кадру/с) або
+    рамка «згорнулась» (stomp_shrink від звичної висоти). Тоді "roll" на вершині.
     jumps_log — список, куди дописуються (старт, приземлення) кожного стрибка.
     """
     seen = [(t, b) for t, b in track if b is not None]
@@ -202,8 +204,9 @@ def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, ro
     cand_len = 0
     move_start = None   # коли персонаж почав зсуватися зі смуги
     in_air = rolling = False
-    jump_t = None
-    hist = []  # (t, bottom, height) за останню секунду
+    jump_t = apex_t = None
+    apex_bottom = 1.0
+    hist = []  # (t, bottom, height, у повітрі) за останні ground_window с
 
     for t, cx, bottom, height in zip(ts, cxs, bottoms, heights):
         # --- смуга ---
@@ -224,28 +227,43 @@ def actions_from_track(track, swipe_cfg, lead=0.1, stable=2, jump_rise=0.035, ro
             elif near == lane:
                 move_start = None
 
-        # --- стрибок і пірнання ---
-        hist = [(ht, hb, hh) for ht, hb, hh in hist if t - ht <= 1.0]
-        if hist:
-            ground = max(hb for _, hb, _ in hist)                 # найнижча точка = земля (або дах вагона)
-            usual_h = float(np.median([hh for _, _, hh in hist]))
-            recent = [hb for ht, hb, _ in hist if t - ht <= 0.25]
-            if not in_air and recent and max(recent) - bottom > jump_rise:
-                out.append(_swipe("jump", t - lead - 0.1, swipe_cfg))
-                in_air, jump_t = True, t
-            elif in_air and ground - bottom < jump_rise / 2:
+        # --- стрибок, stomp і пірнання ---
+        # Земля — 85-й перцентиль низу рамки за останні ground_window с: стійко до
+        # пропусків детектора й підлаштовується під дах вагона.
+        hist = [h for h in hist if t - h[0] <= ground_window]
+        hist.append((t, bottom, height, in_air))
+        ground = float(np.percentile([h[1] for h in hist], 85))
+        elev = ground - bottom
+        if not in_air:
+            if elev > jump_rise:
+                out.append(_swipe("jump", t - lead - 0.05, swipe_cfg))
+                in_air, jump_t, apex_t, apex_bottom = True, t, t, bottom
+                fall_v, min_h, prev = 0.0, height, (t, bottom)
+            else:
+                usual_h = float(np.median([h[2] for h in hist if not h[3]] or [height]))
+                if not rolling and height < roll_shrink * usual_h:
+                    out.append(_swipe("roll", t - lead, swipe_cfg))
+                    rolling = True
+                elif rolling and height > 0.85 * usual_h:
+                    rolling = False
+        else:
+            if bottom < apex_bottom:
+                apex_t, apex_bottom = t, bottom          # ще набирає висоту
+            else:                                         # падає: швидкість і «згортання»
+                if t > prev[0]:
+                    fall_v = max(fall_v, (bottom - prev[1]) / (t - prev[0]))
+                min_h = min(min_h, height)
+            prev = (t, bottom)
+            if elev < jump_rise * 0.4 or t - jump_t > 2.5:
                 in_air = False
                 if jumps_log is not None:
                     jumps_log.append((jump_t, t))
-                if stomp_max_air and t - jump_t < stomp_max_air:
-                    out.append(_swipe("roll", t - lead - 0.15, swipe_cfg))
-            if not in_air and not rolling and height < roll_shrink * usual_h:
-                out.append(_swipe("roll", t - lead, swipe_cfg))
-                rolling = True
-            elif rolling and height > 0.85 * usual_h:
-                rolling = False
-        if not rolling:  # під час пірнання висота нетипова, не псуємо нею медіану
-            hist.append((t, bottom, height))
+                usual_h = float(np.median([h[2] for h in hist if not h[3]] or [height]))
+                # stomp вмикаємо лише за кількох ознак разом: хибний удар униз посеред
+                # стрибка через вагон коштує всього рівня, а пропущений — однієї зірки
+                if stomp_max_air and t - jump_t < stomp_max_air and (
+                        fall_v >= stomp_fall or min_h <= stomp_shrink * usual_h):
+                    out.append(_swipe("roll", apex_t - lead, swipe_cfg))
 
     return sorted(out, key=lambda g: g.t)
 

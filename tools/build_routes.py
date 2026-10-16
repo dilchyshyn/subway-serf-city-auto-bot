@@ -122,8 +122,10 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
         lane_swipes, dropped = video.lane_events(bursts, width)
         gestures = [route._swipe(a, t - t0 - 0.1, cfg["swipe"]) for t, a in lane_swipes]
         track = [(t - t0, b) for t, b, s in zip(times, boxes, sel) if s and b is not None]
-        # stomp (свайп униз у повітрі) з відео поки визначається ненадійно — вимкнено
-        gestures += route.actions_from_track(track, cfg["swipe"], lanes=False)
+        gestures += route.actions_from_track(track, cfg["swipe"], lanes=False,
+                                             stomp_max_air=cfg["video"]["stomp_max_air"],
+                                             stomp_fall=cfg["video"]["stomp_fall"],
+                                             stomp_shrink=cfg["video"]["stomp_shrink"])
         gestures.sort(key=lambda g: g.t)
 
         name = f"{slug(title)}_{k + 1}"
@@ -149,7 +151,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("sources", nargs="*", help="посилання на відео або локальні файли")
     p.add_argument("--channel", help="канал YouTube: обробити всі відео Subway Surfers City")
-    p.add_argument("--model", help="YOLO-модель з класом player (за замовчуванням з config.json)")
+    p.add_argument("--model", help="YOLO-модель з класом player (за замовчуванням models/player.pt)")
     p.add_argument("--out", default=str(ROOT / "routes"))
     p.add_argument("--videos", default=str(ROOT / "rec" / "videos"), help="куди качати відео")
     p.add_argument("--det-every", type=int, default=2, help="шукати персонажа на кожному N-му кадрі")
@@ -158,7 +160,7 @@ def main():
     from bot.detector import YoloDetector
     cfg = load_config()
     v = cfg["vision"]
-    detector = YoloDetector(args.model or str(ROOT / v["model"]), v["conf"], v["imgsz"])
+    detector = YoloDetector(args.model or str(ROOT / "models" / "player.pt"), v["conf"], cfg["video"]["imgsz"])
 
     items = [(s, Path(s).stem if not s.startswith("http") else s) for s in args.sources]
     if args.channel:

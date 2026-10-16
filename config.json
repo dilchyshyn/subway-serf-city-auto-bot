@@ -38,6 +38,12 @@
   "stomp_delay": 0.25,
   "stomp_cooldown": 0.8,
   "play_button": [0.5, 0.705],
+  "video": {
+    "imgsz": 480,
+    "stomp_max_air": 0.65,
+    "stomp_fall": 3.0,
+    "stomp_shrink": 0.6
+  },
   "tour": {
     "routes": "routes",
     "min_score": 0.9,

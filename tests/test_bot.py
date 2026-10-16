@@ -304,6 +304,25 @@ class RouteTest(unittest.TestCase):
         for g, t in zip(gestures, expected):
             self.assertLess(abs(g.t - t), 0.25, (g.action, g.t))
 
+    def test_stomp_needs_short_air_and_hard_fall(self):
+        def jump_track(fall_time):
+            track = []
+            for i in range(int(4 / 0.033)):
+                t = i * 0.033
+                bottom = 0.85
+                if 1.0 <= t < 1.3:                    # злёт
+                    bottom -= 0.4 * (t - 1.0) / 0.3
+                elif 1.3 <= t < 1.3 + fall_time:      # падіння
+                    bottom -= 0.4 * (1 - (t - 1.3) / fall_time)
+                track.append((t, (0.45, bottom - 0.2, 0.55, bottom)))
+            return track
+        cfg = load_config()
+        kw = dict(lanes=False, stomp_max_air=0.65, stomp_fall=3.0, stomp_shrink=0.6)
+        stomp = route.actions_from_track(jump_track(0.12), cfg["swipe"], **kw)
+        normal = route.actions_from_track(jump_track(0.6), cfg["swipe"], **kw)
+        self.assertEqual([g.action for g in stomp], ["jump", "roll"])
+        self.assertEqual([g.action for g in normal], ["jump"])
+
     def test_merge_boxes(self):
         full, torso, other = (0.2, 0.7, 0.3, 0.85), (0.21, 0.72, 0.29, 0.8), (0.7, 0.7, 0.8, 0.85)
         self.assertEqual(route.merge_boxes([(0.6, full), (0.8, torso), (0.5, other)]), full)
