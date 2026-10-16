@@ -242,8 +242,9 @@ class RouteTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             path = Path(d) / "lvl.json"
             route.save(path, "docks_01", gestures)
-            level, loaded = route.load(path)
+            level, loaded, start = route.load(path)
         self.assertEqual(level, "docks_01")
+        self.assertEqual(start, "tap")
         self.assertEqual([g.t for g in loaded], [0.0, 1.5, 2.0])
 
         player = route.RoutePlayer(loaded, start_time=10.0, offset=0.3)
@@ -253,6 +254,40 @@ class RouteTest(unittest.TestCase):
         self.assertAlmostEqual(player.next_in(11.8), 0.5)
         self.assertEqual([g.action for g in player.due(20)], ["jump"])
         self.assertTrue(player.finished)
+
+    def test_actions_from_video_track(self):
+        lanes_x = {0: 0.25, 1: 0.5, 2: 0.75}
+        track = []
+        for i in range(int(6 / 0.033)):
+            t = i * 0.033
+            lane = 1 if t < 1.0 else 0 if t < 4.0 else 1
+            bottom, height = 0.85, 0.12
+            if 2.0 <= t < 2.6:                       # стрибок: низ рамки піднімається
+                bottom -= 0.15 * np.sin((t - 2.0) / 0.6 * np.pi)
+            if 3.0 <= t < 3.5:                       # пірнання: рамка нижча
+                height = 0.06
+            x = lanes_x[lane]
+            track.append((t, (x - 0.04, bottom - height, x + 0.04, bottom)))
+            if i % 40 == 0:
+                track.append((t + 0.01, None))       # персонаж іноді не знайдений
+        gestures = route.actions_from_track(track, load_config()["swipe"])
+        self.assertEqual([g.action for g in gestures], ["left", "jump", "roll", "right"])
+        expected = [1.0, 2.0, 3.0, 4.0]
+        for g, t in zip(gestures, expected):
+            self.assertLess(abs(g.t - t), 0.25, (g.action, g.t))
+
+    def test_merge_boxes(self):
+        full, torso, other = (0.2, 0.7, 0.3, 0.85), (0.21, 0.72, 0.29, 0.8), (0.7, 0.7, 0.8, 0.85)
+        self.assertEqual(route.merge_boxes([(0.6, full), (0.8, torso), (0.5, other)]), full)
+        self.assertIsNone(route.merge_boxes([]))
+
+    def test_manual_route_player(self):
+        gestures = route.actions_from_track([], load_config()["swipe"])
+        self.assertEqual(gestures, [])
+        g = route.Gesture(1.0, "left", 0.5, 0.6, 0.25, 0.6, 40)
+        player = route.RoutePlayer([g], start_time=0, offset=0.5, first_immediate=False)
+        self.assertEqual(player.due(1.2), [])          # offset діє і на перший жест
+        self.assertEqual(player.due(1.5), [g])
 
     def test_classify(self):
         self.assertEqual(route.classify(0.5, 0.5, 0.51, 0.5), "tap")

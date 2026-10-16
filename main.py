@@ -65,7 +65,7 @@ def main():
     geo = LaneGeometry(cfg)
     player = None
     if args.route:
-        level, gestures = routes.load(args.route)
+        level, gestures, start_mode = routes.load(args.route)
         if not gestures:
             raise SystemExit(f"Маршрут {args.route} порожній")
     need_vision = not args.route or args.route_guard or args.show or args.record
@@ -76,9 +76,14 @@ def main():
     brain = Brain(cfg)
 
     if args.route:
-        player = routes.RoutePlayer(gestures, time.monotonic(), args.route_offset)
-        print(f"Маршрут «{level}»: {len(gestures)} жестів, {gestures[-1].t:.1f} с. "
-              "Екран рівня з кнопкою «Грати» має бути відкритий.")
+        print(f"Маршрут «{level}»: {len(gestures)} жестів, {gestures[-1].t:.1f} с.")
+        if start_mode == "manual":
+            # маршрут з відео: тапу «Грати» в ньому немає, синхронізуємося за стартом забігу
+            input("Натисни «Грати» на телефоні, потім Enter тут у момент, коли персонаж почне бігти...")
+        else:
+            print("Екран рівня з кнопкою «Грати» має бути відкритий, бот натисне її сам.")
+        player = routes.RoutePlayer(gestures, time.monotonic(), args.route_offset,
+                                    first_immediate=start_mode == "tap")
 
     rec_dir = Path(args.record) if args.record else None
     if rec_dir:
