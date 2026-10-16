@@ -48,6 +48,8 @@ def parse_args():
                    help="зсув маршруту в секундах, якщо рівень вантажиться довше/коротше, ніж під час запису")
     p.add_argument("--route-guard", action="store_true",
                    help="між жестами маршруту стрибати/пірнати перед несподіваними перешкодами")
+    p.add_argument("--diag", action="store_true",
+                   help="записати кадри й журнал дій у rec/diag/<час>/ для розбору помилок")
     p.add_argument("--dry-run", action="store_true", help="не надсилати жести на телефон")
     p.add_argument("--show", action="store_true", help="показувати вікно налагодження")
     p.add_argument("--record", help="зберігати сирі кадри в цю папку (для датасету)")
@@ -125,7 +127,7 @@ def main():
             raise SystemExit(f"Маршрут {args.route} порожній")
     need_vision = not args.route or args.route_guard or args.show or args.record
     # маршрут з відео стартує за появою HUD на екрані — для цього потрібні кадри
-    need_capture = need_vision or (args.route and start_mode == "hud")
+    need_capture = need_vision or args.diag or (args.route and start_mode == "hud")
 
     detector = make_detector(args.vision or cfg["vision"]["backend"], cfg, geo, args.model) if need_vision else None
     if cap is None and need_capture:
@@ -154,6 +156,20 @@ def main():
         player = routes.RoutePlayer(gestures, time.monotonic(), args.route_offset,
                                     first_immediate=start_mode == "tap")
 
+    diag = None
+    if args.diag:
+        diag_dir = ROOT / "rec" / "diag" / time.strftime("%Y%m%d_%H%M%S")
+        diag_dir.mkdir(parents=True, exist_ok=True)
+        diag = {"dir": diag_dir, "t0": time.monotonic(), "log": open(diag_dir / "log.txt", "w", encoding="utf-8"),
+                "last": 0.0}
+        diag["log"].write(f"route={args.route} offset={args.route_offset}\n")
+        print(f"Діагностика пишеться в {diag_dir}")
+
+    def diag_event(text):
+        if diag:
+            diag["log"].write(f"{time.monotonic() - diag['t0']:8.3f} {text}\n")
+            diag["log"].flush()
+
     rec_dir = Path(args.record) if args.record else None
     if rec_dir:
         rec_dir.mkdir(parents=True, exist_ok=True)
@@ -167,6 +183,7 @@ def main():
             if player and not paused:
                 for g in player.due(now):
                     ctl.gesture(g)
+                    diag_event(f"route {g.t:.2f} {g.action}")
                     last_action = f"route {g.action}"
                     if g.action in (LEFT, RIGHT):
                         brain.lane = min(max(brain.lane + (1 if g.action == RIGHT else -1), 0), 2)
@@ -176,6 +193,12 @@ def main():
                     if not args.show:
                         break
 
+            if diag and now - diag["last"] >= 0.1:  # кадр кожні 0,1 с
+                frame = cap.read()
+                if frame is not None:
+                    diag["last"] = now
+                    cv2.imwrite(str(diag["dir"] / f"{now - diag['t0']:08.3f}.jpg"),
+                                cv2.resize(frame, (288, int(288 * frame.shape[0] / frame.shape[1]))))
             if not need_vision:
                 time.sleep(0.005)
                 continue
@@ -195,6 +218,7 @@ def main():
                     action = brain.emergency(scene, now)
             if action:
                 ctl.act(action)
+                diag_event(f"act {action}")
                 last_action = action
                 print(f"{action:>6}  lane={brain.lane}  " + "  ".join(
                     f"{s.near or '-'}/{s.far or '-'}+{s.value:g}" for s in scene.lanes) +
