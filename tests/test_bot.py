@@ -303,6 +303,39 @@ class RouteTest(unittest.TestCase):
         self.assertEqual(route.classify(0.5, 0.5, 0.5, 0.8), "roll")
 
 
+# Сплески бічного руху, виміряні на справжньому відео (The Docks 1.1, Zero Mode)
+PILOT_BURSTS = [(10.53, -196), (11.87, 176), (13.20, 7), (15.20, -199), (16.73, 404), (18.83, -406),
+                (21.60, 194), (22.87, -196), (24.27, 204), (25.10, -198), (26.10, 194), (31.17, 200),
+                (32.20, -205), (32.87, -55), (35.13, -145), (38.03, 55), (39.83, 179), (42.37, -204),
+                (44.43, -187), (46.17, 179), (48.00, 191), (48.83, -387), (50.63, 192)]
+
+
+class VideoTest(unittest.TestCase):
+    def test_segment_runs(self):
+        from bot.video import segment_runs
+        times = [i * 0.5 for i in range(60)]
+        flags = [3 <= t < 12 or 14 <= t < 16 or 18 <= t < 28 and t != 20 for t in times]
+        self.assertEqual(segment_runs(times, flags), [(3.0, 11.5), (18.0, 27.5)])
+
+    def test_lane_events_on_pilot(self):
+        from bot.video import lane_events
+        bursts = [(t, t + 0.4, s) for t, s in PILOT_BURSTS]
+        swipes, dropped = lane_events(bursts, width=288)
+        self.assertEqual(dropped, [35.13])   # стрибок Bubblegum на дах, не зміна смуги
+        lane = 1
+        for _, a in swipes:
+            lane += 1 if a == "right" else -1
+            self.assertTrue(0 <= lane <= 2)
+        self.assertEqual(len(swipes), 22)    # 16 одинарних + 3 подвійних сплески
+
+    def test_hud_visible(self):
+        from bot.video import hud_visible
+        img = np.full((640, 288, 3), (40, 90, 200), np.uint8)
+        self.assertFalse(hud_visible(img))
+        cv2.rectangle(img, (int(0.03 * 288), int(0.015 * 640)), (int(0.05 * 288), int(0.04 * 640)), (0, 210, 255), -1)
+        self.assertTrue(hud_visible(img))
+
+
 class ProfileTest(unittest.TestCase):
     def test_profile_overrides_and_saves(self):
         with tempfile.TemporaryDirectory() as d:
