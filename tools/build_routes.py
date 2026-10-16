@@ -129,7 +129,16 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
         gestures.sort(key=lambda g: g.t)
 
         name = f"{slug(title)}_{k + 1}"
-        card = next((c for c in reversed(cards) if c[0] < t0 and t0 - c[0] < 90), None)
+        card, card_text = None, None
+        for c in reversed(cards):  # остання справжня картка рівня перед забігом
+            if c[0] >= t0:
+                continue
+            if t0 - c[0] > 90:
+                break
+            text = video.card_text(video._band(c[1], c[2], video.OBJECTIVES_DY))
+            if video.is_level_card_text(text):  # екран нагород теж має жовту кнопку
+                card, card_text = c, text
+                break
         meta = {"source": source, "title": title, "run": [round(t0, 2), round(t1, 2)],
                 "dropped_lane_events": [round(t - t0, 2) for t in dropped],
                 "player_frames": len(track)}
@@ -138,13 +147,13 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
             (out_dir / "cards").mkdir(parents=True, exist_ok=True)
             (out_dir / "crew").mkdir(parents=True, exist_ok=True)
             band = video._band(img, play, video.OBJECTIVES_DY)
-            cv2.imwrite(str(out_dir / "cards" / f"{name}.png"), band)
-            meta["card_text"] = video.card_text(band)
+            cv2.imwrite(str(out_dir / "cards" / f"{name}.jpg"), band, [cv2.IMWRITE_JPEG_QUALITY, 85])
+            meta["card_text"] = card_text
             meta["card_state"] = list(video.card_state(band))
-            cv2.imwrite(str(out_dir / "crew" / f"{name}.png"), video.crew_crop(img, play))
+            cv2.imwrite(str(out_dir / "crew" / f"{name}.jpg"), video.crew_crop(img, play), [cv2.IMWRITE_JPEG_QUALITY, 85])
             # для впізнавання рівня потрібен лише блок завдань; повні кадри в репозиторій не кладемо
-            meta["card"] = f"cards/{name}.png"
-            meta["crew"] = f"crew/{name}.png"
+            meta["card"] = f"cards/{name}.jpg"
+            meta["crew"] = f"crew/{name}.jpg"
         route.save(out_dir / f"{name}.json", name, gestures, start="hud", rebase=False, meta=meta)
         results.append((name, len(gestures), t1 - t0, len(dropped), card is not None))
     return results

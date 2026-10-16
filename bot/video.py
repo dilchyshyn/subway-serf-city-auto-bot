@@ -219,21 +219,65 @@ def card_text(band):
     img = cv2.resize(band, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
     result, _ = _ocr(img)
     words = [r[1] for r in sorted(result or [], key=lambda r: (r[0][0][1] // 40, r[0][0][0]))]
-    text = "".join(w for w in words if "/" not in w).lower()
-    return "".join(ch for ch in text if ch.isalnum())
+    # лишаємо тільки завдання: без лічильників «0/8», назви району, «Recommended
+    # surfer level» тощо — ці рядки потрапляють у вирізку не на кожній спробі
+    keep = [w.lower() for w in words if "/" not in w and not any(j in _norm_word(w) for j in _JUNK)]
+    return "".join(ch for w in keep for ch in w if ch.isalnum())
+
+
+# фрагменти, стійкі до помилок OCR («rocommended», «rewaros», «suferlevel»)
+_JUNK = ("comm", "mend", "sufer", "surfer", "level", "rewar", "blvd", "southl", "docks", "delor",
+         "undert", "phant", "spook", "normal", "hard", "featur", "crew")
+
+
+def _norm_word(w):
+    return "".join(ch for ch in w.lower() if ch.isalpha())
+
+
+def is_level_card_text(text):
+    """Схоже на завдання рівня: є числа й достатньо тексту (а не екран нагород)."""
+    return len(text) >= 15 and sum(ch.isdigit() for ch in text) >= 2
+
+
+def _numbers(s):
+    """Множина чисел з тексту OCR. Літери, які OCR плутає з цифрами, поруч із
+    цифрою читаються як цифри: 16ooo → 16000, pop1g → 19, b8000 → 88000."""
+    import re
+    fix = {"o": "0", "g": "9", "b": "8"}
+    prev = None
+    while prev != s:
+        prev = s
+        s = re.sub(r"(?<=\d)[og]|[ob](?=\d)", lambda m: fix[m.group()], s)
+    return {n for n in re.findall(r"\d+", s) if int(n) > 0}
+
+
+def _same_number(a, b):
+    """Те саме число з поправкою на OCR: однакова довжина й щонайбільше одна інша цифра."""
+    return a == b or (len(a) == len(b) and len(a) >= 3 and sum(x != y for x, y in zip(a, b)) <= 1)
+
+
+def _grams(s):
+    s = "".join(ch for ch in s if ch.isalpha())
+    return {s[i:i + 3] for i in range(len(s) - 2)}
 
 
 def text_similarity(a, b):
-    """Нечітка подібність текстів завдань; числа важать половину оцінки."""
-    from difflib import SequenceMatcher
+    """Подібність текстів завдань, нечутлива до порядку рядків (OCR читає їх по-різному).
+
+    Головне — числа завдань (рівні з однаковими типами завдань відрізняються саме
+    ними): частка збігу меншої множини чисел з більшою. Збіг трибуквених
+    фрагментів слів лише уточнює оцінку.
+    """
     if not a or not b:
         return 0.0
-    norm = lambda s: s.translate(_CONFUSABLE)  # noqa: E731 — OCR плутає o/0, l/1 ...
-    digits = lambda s: "".join(ch for ch in s if ch.isdigit())  # noqa: E731
-    letters = SequenceMatcher(None, norm(a), norm(b)).ratio()
-    da, db = digits(a), digits(b)
-    nums = SequenceMatcher(None, da, db).ratio() if da and db else letters
-    return 0.5 * letters + 0.5 * nums
+    ga, gb = _grams(a), _grams(b)
+    letters = 2 * len(ga & gb) / (len(ga) + len(gb)) if ga and gb else 0.0
+    na, nb = _numbers(a), _numbers(b)
+    if not na or not nb:
+        return letters
+    small, big = sorted((na, nb), key=len)
+    nums = sum(any(_same_number(x, y) for y in big) for x in small) / len(small)
+    return 0.7 * nums + 0.3 * letters
 
 
 def card_state(band):
