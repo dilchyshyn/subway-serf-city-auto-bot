@@ -5,7 +5,7 @@
 """
 from dataclasses import dataclass, field
 
-from .classes import HUD_CLASSES, OBSTACLE_KIND
+from .classes import HUD_CLASSES, JUMP_TARGETS, OBSTACLE_KIND
 
 
 @dataclass
@@ -25,6 +25,7 @@ class LaneState:
     value: float = 0.0        # сумарна цінність предметів у смузі
     items: dict = field(default_factory=dict)
     stomp: bool = False       # stomp-ціль у near-зоні: час стрибати й бити вниз
+    jump_target: bool = False  # дрон чи бабл у near-зоні: час стрибати
 
 
 @dataclass
@@ -61,11 +62,16 @@ def build_scene(detections, w, h, geo, cfg):
             continue
 
         cx, cy = (x1 + x2) / 2, (d.y1 + d.y2) / 2 / h
+        if d.cls in JUMP_TARGETS:
+            # висить над дорогою: його «глибина» — низ рамки плюс висота над землею
+            bottom = cy = min(bottom + cfg["float_offset"], 1.0)
         lane = geo.nearest_lane(cx, bottom if d.cls == "stomp_target" else cy)
         if lane is None:
             continue
         if d.cls == "stomp_target" and geo.zone_of(bottom, ("near",)):
             lanes[lane].stomp = True
+        if d.cls in JUMP_TARGETS and geo.zone_of(bottom, ("near",)):
+            lanes[lane].jump_target = True
         if geo.zone_of(cy, ("pickup",)) and d.cls in weights:
             st = lanes[lane]
             st.items[d.cls] = st.items.get(d.cls, 0) + 1

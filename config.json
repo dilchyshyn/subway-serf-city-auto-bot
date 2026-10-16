@@ -26,8 +26,11 @@
     "energy": 4,
     "powerup": 10,
     "star": 15,
-    "stomp_target": 5
+    "stomp_target": 5,
+    "drone": 6,
+    "bounce_bubble": 6
   },
+  "float_offset": 0.12,
   "pickup_bias": 0.05,
   "pickup_min_gain": 3,
   "far_weight": 0.5,

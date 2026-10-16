@@ -83,6 +83,21 @@ class SceneTest(unittest.TestCase):
         s = self.scene([box_at(self.geo, "player", 1, 0.80, 0.08, 0.12)])
         self.assertTrue(all(l.value == 0 and l.near is None for l in s.lanes))
 
+    def test_drone_and_bubble_are_jump_targets(self):
+        off = self.cfg["float_offset"]
+
+        def floating(cls, lane, depth, bw, bh):
+            # висить на off вище за точку на дорозі з глибиною depth
+            cx = self.geo.center_x(lane, depth)
+            y2 = depth - off
+            return Detection(cls, 0.9, (cx - bw / 2) * W, (y2 - bh) * H, (cx + bw / 2) * W, y2 * H)
+
+        s = self.scene([floating("drone", 1, 0.62, 0.10, 0.04),
+                        floating("bounce_bubble", 2, 0.45, 0.06, 0.06)])
+        self.assertTrue(s.lanes[1].jump_target)
+        self.assertFalse(s.lanes[2].jump_target)          # бабл ще далеко
+        self.assertEqual(s.lanes[2].value, self.cfg["weights"]["bounce_bubble"])
+
     def test_off_road_pickup_ignored(self):
         s = self.scene([Detection("coin", 0.9, 0, 0.6 * H, 10, 0.6 * H + 10)])
         self.assertTrue(all(l.value == 0 for l in s.lanes))
@@ -158,6 +173,11 @@ class BrainTest(unittest.TestCase):
         b = Brain(self.cfg, lane=1)
         self.assertEqual(b.decide(sc(st(), st(stomp=True), st()), now=0), STOMP)
         self.assertIsNone(b.decide(sc(st(TALL), st(TALL), st()), now=self.cfg["action_cooldown"] + 0.01))
+
+    def test_jump_to_drone(self):
+        b = Brain(self.cfg, lane=1)
+        jt = LaneState(jump_target=True)
+        self.assertEqual(b.decide(sc(st(), jt, st()), now=0), JUMP)
 
     def test_chase_powerup_over_coins(self):
         b = Brain(self.cfg, lane=1)
