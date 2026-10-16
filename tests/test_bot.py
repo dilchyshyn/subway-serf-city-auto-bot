@@ -428,6 +428,20 @@ class CardTextTest(unittest.TestCase):
         self.assertEqual(card_state(band), (0, 0, 1))
 
 
+class PolicyTest(unittest.TestCase):
+    def test_same_input_for_video_and_phone(self):
+        from bot.policy import preprocess
+        video = np.zeros((640, 288, 3), np.uint8)
+        phone = np.zeros((1216, 544, 3), np.uint8)
+        self.assertEqual(preprocess(video).shape, preprocess(phone).shape)
+
+    def test_net_outputs_one_score_per_action(self):
+        from bot.policy import PolicyNet, preprocess, to_tensor
+        img = preprocess(np.zeros((640, 288, 3), np.uint8))[None]
+        out = PolicyNet(5)(to_tensor(np.repeat(img, 2, 0), np.repeat(img, 2, 0)))
+        self.assertEqual(tuple(out.shape), (2, 5))
+
+
 class ProfileTest(unittest.TestCase):
     def test_profile_overrides_and_saves(self):
         with tempfile.TemporaryDirectory() as d:
