@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=wXqNGiPmkpQ",
  "title": "Subway Surfers City Southline Chapter 4 (4.1–4.5) Full Gameplay Walkthrough levels 12 to 16",
+ "uploaded": "",
  "run": [
   159.6,
   210.23
@@ -26,15 +27,6 @@
  "card": "cards/southline_chapter_4_4_1_4_5_full_gameplay_walkthrough_levels_3.jpg",
  "crew": "crew/southline_chapter_4_4_1_4_5_full_gameplay_walkthrough_levels_3.jpg",
  "gestures": [
-  {
-   "t": 0.25,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 5.717,
    "action": "jump",

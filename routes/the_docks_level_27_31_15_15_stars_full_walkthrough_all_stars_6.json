@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=nDNNN89W4RU",
  "title": "Subway Surfers City The Docks level 27–31 | 15/15 Stars Full Walkthrough + All Stars",
+ "uploaded": "",
  "run": [
   388.2,
   445.37
@@ -23,15 +24,6 @@
  "card": "cards/the_docks_level_27_31_15_15_stars_full_walkthrough_all_stars_6.jpg",
  "crew": "crew/the_docks_level_27_31_15_15_stars_full_walkthrough_all_stars_6.jpg",
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 4.05,
    "action": "jump",

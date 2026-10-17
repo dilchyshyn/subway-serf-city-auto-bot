@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=O743WIN2kXo",
  "title": "Subway Surfers City | Undertracks Level 30–33 Gameplay Walkthrough ⭐ All 3 Stars",
+ "uploaded": "",
  "run": [
   9.33,
   64.13
@@ -26,15 +27,6 @@
  "card": "cards/undertracks_level_30_33_gameplay_walkthrough_all_3_stars_1.jpg",
  "crew": "crew/undertracks_level_30_33_gameplay_walkthrough_all_3_stars_1.jpg",
  "gestures": [
-  {
-   "t": 0.384,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 2.947,
    "action": "roll",

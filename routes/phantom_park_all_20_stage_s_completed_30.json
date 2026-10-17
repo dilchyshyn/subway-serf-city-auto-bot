@@ -24,6 +24,15 @@
  "card": "cards/phantom_park_all_20_stage_s_completed_30.jpg",
  "gestures": [
   {
+   "t": 0.0,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 2.152,
    "action": "jump",
    "x1": 0.5,

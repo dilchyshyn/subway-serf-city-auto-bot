@@ -28,6 +28,15 @@
  "crew": "crew/phantom_park_all_levels_1_20_complete_walkthrough_2.jpg",
  "gestures": [
   {
+   "t": 0.0,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 4.41,
    "action": "jump",
    "x1": 0.5,

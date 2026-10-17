@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=MVY5-eTfBFg",
  "title": "Subway Surfers City The Docks level 32–36 | ALL STARS (100%) Final Chapter",
+ "uploaded": "",
  "run": [
   8.27,
   54.83
@@ -11,15 +12,6 @@
  "bounces": [],
  "player_frames": 433,
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 2.383,
    "action": "jump",

@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=tz7c1LpG-0w",
  "title": "Subway Surfers City | Phantom Park Levels 1–5 Gameplay | All 3 Stars | Halloween Event",
+ "uploaded": "",
  "run": [
   59.8,
   79.67
@@ -22,15 +23,6 @@
  "card": "cards/phantom_park_levels_1_5_gameplay_all_3_stars_halloween_event_2.jpg",
  "crew": "crew/phantom_park_levels_1_5_gameplay_all_3_stars_halloween_event_2.jpg",
  "gestures": [
-  {
-   "t": 0.317,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 0.967,
    "action": "right",

@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=jvppo0hFT1U",
  "title": "Subway Surfers City –Southline Chapter 2 Full Gameplay (2.1–2.4) level 4-7",
+ "uploaded": "",
  "run": [
   262.63,
   295.73
@@ -21,15 +22,6 @@
  "card": "cards/southline_chapter_2_full_gameplay_2_1_2_4_level_4_7_4.jpg",
  "crew": "crew/southline_chapter_2_full_gameplay_2_1_2_4_level_4_7_4.jpg",
  "gestures": [
-  {
-   "t": 0.284,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 1.0,
    "action": "right",

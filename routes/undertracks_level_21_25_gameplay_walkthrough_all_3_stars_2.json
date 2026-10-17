@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=bDnToi5zOSM",
  "title": "Subway Surfers City | Undertracks Level 21–25 Gameplay Walkthrough ⭐ All 3 Stars",
+ "uploaded": "",
  "run": [
   53.6,
   66.63
@@ -23,15 +24,6 @@
  "card": "cards/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_2.jpg",
  "crew": "crew/undertracks_level_21_25_gameplay_walkthrough_all_3_stars_2.jpg",
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 4.317,
    "action": "jump",

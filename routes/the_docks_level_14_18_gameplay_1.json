@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=qWzDB7ONWtM",
  "title": "Subway Surfers City The Docks level 14–18 Gameplay ",
+ "uploaded": "",
  "run": [
   9.97,
   56.5
@@ -14,15 +15,6 @@
  "bounces": [],
  "player_frames": 477,
  "gestures": [
-  {
-   "t": 0.017,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 6.033,
    "action": "right",

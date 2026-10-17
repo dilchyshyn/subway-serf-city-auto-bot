@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=GC3s5MBCdlU",
  "title": "Southline level 20 - 23 | Chapter 2 12/12 Stars Complete ⭐ Subway Surfers City",
+ "uploaded": "",
  "run": [
   6.97,
   45.5
@@ -23,15 +24,6 @@
  "card": "cards/southline_level_20_23_chapter_2_12_12_stars_complete_1.jpg",
  "crew": "crew/southline_level_20_23_chapter_2_12_12_stars_complete_1.jpg",
  "gestures": [
-  {
-   "t": 0.083,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 4.016,
    "action": "jump",

@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=aPVi4LTlzD0",
  "title": "Subway Surfers City | Undertacks HARD MODE Chapter 2 (2.1–2.5) 🔥 15/15 Stars + Noon Unlocked",
+ "uploaded": "",
  "run": [
   444.6,
   481.1
@@ -22,15 +23,6 @@
  "card": "cards/undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_8.jpg",
  "crew": "crew/undertacks_hard_mode_chapter_2_2_1_2_5_15_15_stars_noon_unlo_8.jpg",
  "gestures": [
-  {
-   "t": 0.45,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 3.05,
    "action": "jump",

@@ -25,24 +25,6 @@
  "card": "cards/phantom_park_full_city_tour_20_levels_all_halloween_outfits_20.jpg",
  "gestures": [
   {
-   "t": 0.55,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
-  {
-   "t": 0.6,
-   "action": "roll",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.85,
-   "duration_ms": 40
-  },
-  {
    "t": 0.8,
    "action": "roll",
    "x1": 0.5,

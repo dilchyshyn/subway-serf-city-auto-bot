@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=TdP_MNTH3vI",
  "title": "Subway Surfers City Sunrise Blvd Chapter 4 Gameplay (4.1–4.5)",
+ "uploaded": "",
  "run": [
   210.2,
   252.47
@@ -25,15 +26,6 @@
  "card": "cards/sunrise_blvd_chapter_4_gameplay_4_1_4_5_4.jpg",
  "crew": "crew/sunrise_blvd_chapter_4_gameplay_4_1_4_5_4.jpg",
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 3.317,
    "action": "jump",
