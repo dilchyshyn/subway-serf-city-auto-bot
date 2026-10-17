@@ -465,5 +465,39 @@ class ProfileTest(unittest.TestCase):
             load_config(profile="nope")
 
 
+class LibraryPreferenceTest(unittest.TestCase):
+    """Маршрути з відео після оновлення туру важливіші за Zero Mode, але лише для того самого рівня."""
+
+    def _lib(self, routes):
+        from bot.library import RouteLibrary
+        d = Path(tempfile.mkdtemp())
+        (d / "cards").mkdir()
+        for name, text, state, uploaded in routes:
+            cv2.imwrite(str(d / "cards" / f"{name}.jpg"), np.zeros((10, 30, 3), np.uint8))
+            data = {"level": name, "card": f"cards/{name}.jpg", "card_text": text, "card_state": state}
+            if uploaded:
+                data["uploaded"] = uploaded
+            (d / f"{name}.json").write_text(json.dumps(data))
+        return RouteLibrary(d)
+
+    def _match(self, lib, text, state=(0, 0, 0)):
+        from unittest import mock
+        from bot import video
+        with mock.patch.object(video, "card_text", return_value=text), \
+                mock.patch.object(video, "card_state", return_value=state):
+            return lib.match_band(np.zeros((10, 30, 3), np.uint8))
+
+    def test_prefers_new_video_for_same_level(self):
+        text = "collect120coinsscore9000stompon12buriedcaches"
+        lib = self._lib([("zero_1", text, [0, 0, 0], ""), ("new_1", text, [1, 0, 0], "20261002")])
+        self.assertEqual(self._match(lib, text).name, "new_1")
+
+    def test_falls_back_to_zero_mode_when_numbers_differ(self):
+        text = "collect120coinsscore9000stompon12buriedcaches"
+        lib = self._lib([("zero_1", text, [0, 0, 0], ""),
+                         ("new_1", "collect120coinsscore9500stompon13buriedcaches", [0, 0, 0], "20261002")])
+        self.assertEqual(self._match(lib, text).name, "zero_1")
+
+
 if __name__ == "__main__":
     unittest.main()

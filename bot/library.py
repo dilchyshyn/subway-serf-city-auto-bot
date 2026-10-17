@@ -25,6 +25,7 @@ class Entry:
     text: str
     state: tuple
     crew: Path | None
+    uploaded: str = ""  # дата відео YYYYMMDD; порожня — старі відео Zero Mode (до оновлення туру)
 
 
 @dataclass
@@ -59,7 +60,7 @@ class RouteLibrary:
                 continue
             text, state = entry_text_state(self.dir, data)
             crew = self.dir / data["crew"] if data.get("crew") else None
-            self.entries.append(Entry(path, data["level"], text, state, crew))
+            self.entries.append(Entry(path, data["level"], text, state, crew, data.get("uploaded", "")))
 
     def __len__(self):
         return len(self.entries)
@@ -78,9 +79,13 @@ class RouteLibrary:
             same.insert(0, top)
         others = [s for s, e in scored if e not in same]
         margin = best - (others[0] if others else 0.0)
-        # спроба з тим самим станом; інакше — з найбільшим збігом виконаних завдань,
-        # серед рівних — найраніша у відео (назви маршрутів закінчуються номером забігу)
+        # спершу спроби з відео після оновлення туру (Zero Mode — лише якщо інших немає);
+        # серед них — з тим самим станом картки, інакше з найбільшим збігом виконаних
+        # завдань, серед рівних — найраніша у відео (назви закінчуються номером забігу)
         attempts = sorted(same, key=lambda e: e.path.name)
+        # (лише ті, чиї числа завдань збігаються з карткою, — щоб не взяти схожий чужий рівень)
+        attempts = [e for e in attempts
+                    if e.uploaded and video.common_numbers(text, e.text) >= MIN_COMMON_NUMBERS] or attempts
         pick = max(enumerate(attempts),
                    key=lambda ie: (ie[1].state == state, sum(a == b for a, b in zip(ie[1].state, state)), -ie[0]))[1]
         return Match(pick.path, pick.name, best, margin, video.common_numbers(text, top.text),

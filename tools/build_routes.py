@@ -61,12 +61,15 @@ def download(url, out_dir):
     return next(out_dir.glob(f"{vid}.*"))
 
 
-def video_title(url):
+def video_info(url):
+    """(назва, дата завантаження YYYYMMDD) відео YouTube."""
     try:
-        return subprocess.run([sys.executable, "-m", "yt_dlp", "--no-warnings", "--skip-download", "--print",
-                               "%(title)s", url], capture_output=True, text=True, check=True).stdout.strip() or url
-    except subprocess.CalledProcessError:
-        return url
+        out = subprocess.run([sys.executable, "-m", "yt_dlp", "--no-warnings", "--skip-download", "--print",
+                              "%(upload_date)s\t%(title)s", url], capture_output=True, text=True, check=True).stdout
+        date, title = out.strip().split("\t", 1)
+        return title or url, date if date.isdigit() else ""
+    except (subprocess.CalledProcessError, ValueError):
+        return url, ""
 
 
 def hires_frame(url, t, videos_dir):
@@ -182,7 +185,7 @@ def apply_bounces(gestures, bounces, cfg, lead=0.12):
     return sorted(out, key=lambda g: g.t)
 
 
-def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
+def build(path, title, out_dir, detector, cfg, det_every=2, source=None, uploaded=""):
     videos_dir = Path(path).parent
     times, hud, shifts, boxes, cards = analyse_cached(path, detector, det_every)
     b_times, b_ratios = bounces_cached(path)
@@ -226,7 +229,7 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
             if video.is_level_card_text(text):  # екран нагород теж має жовту кнопку
                 card, card_text = c, text
                 break
-        meta = {"source": source, "title": title, "run": [round(t0, 2), round(t1, 2)],
+        meta = {"source": source, "title": title, "uploaded": uploaded, "run": [round(t0, 2), round(t1, 2)],
                 "dropped_lane_events": [round(t - t0, 2) for t in dropped],
                 "bounces": [round(t, 2) for t in bounces],
                 "player_frames": len(track)}
@@ -264,16 +267,16 @@ def main():
     v = cfg["vision"]
     detector = YoloDetector(args.model or str(ROOT / "models" / "player.pt"), v["conf"], cfg["video"]["imgsz"])
 
-    items = [(s, Path(s).stem if not s.startswith("http") else video_title(s)) for s in args.sources]
+    items = [(s, *(video_info(s) if s.startswith("http") else (Path(s).stem, ""))) for s in args.sources]
     if args.channel:
-        items += list_channel(args.channel)
+        items += [(url, title, "") for url, title in list_channel(args.channel)]
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     summary = []
-    for i, (src, title) in enumerate(items, 1):
+    for i, (src, title, uploaded) in enumerate(items, 1):
         path = download(src, Path(args.videos)) if src.startswith("http") else Path(src)
         print(f"[{i}/{len(items)}] {title}")
-        for name, n, dur, dropped, has_card in build(path, title, out, detector, cfg, args.det_every, src):
+        for name, n, dur, dropped, has_card in build(path, title, out, detector, cfg, args.det_every, src, uploaded):
             flag = "" if has_card else "  ⚠️ без картки"
             flag += f"  ⚠️ відкинуто подій смуги: {dropped}" if dropped else ""
             print(f"    {name}: {n} жестів, {dur:.0f} с{flag}")
