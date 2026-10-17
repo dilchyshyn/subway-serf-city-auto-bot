@@ -15,7 +15,8 @@ import cv2
 from . import route, video
 
 SAME_LEVEL = 0.55  # подібність тексту завдань, з якої це той самий рівень
-MIN_COMMON_NUMBERS = 2  # для впевненого збігу потрібні щонайменше 2 однакові числа завдань
+MIN_COMMON_NUMBERS = 2
+FULL_RUN_SLACK = 3.0  # с: спроби, коротші за найдовшу більш ніж на стільки, — незавершені  # для впевненого збігу потрібні щонайменше 2 однакові числа завдань
 
 
 @dataclass
@@ -26,6 +27,7 @@ class Entry:
     state: tuple
     crew: Path | None
     uploaded: str = ""  # дата відео YYYYMMDD; порожня — старі відео Zero Mode (до оновлення туру)
+    duration: float = 0.0  # тривалість забігу у відео, с
 
 
 @dataclass
@@ -60,7 +62,9 @@ class RouteLibrary:
                 continue
             text, state = entry_text_state(self.dir, data)
             crew = self.dir / data["crew"] if data.get("crew") else None
-            self.entries.append(Entry(path, data["level"], text, state, crew, data.get("uploaded", "")))
+            run = data.get("run") or [0.0, 0.0]
+            self.entries.append(Entry(path, data["level"], text, state, crew, data.get("uploaded", ""),
+                                      float(run[1]) - float(run[0])))
 
     def __len__(self):
         return len(self.entries)
@@ -86,6 +90,11 @@ class RouteLibrary:
         # (лише ті, чиї числа завдань збігаються з карткою, — щоб не взяти схожий чужий рівень)
         attempts = [e for e in attempts
                     if e.uploaded and video.common_numbers(text, e.text) >= MIN_COMMON_NUMBERS] or attempts
+        # траса рівня фіксована: пройдений до фінішу забіг — найдовший серед спроб рівня, а
+        # коротші — смерть або продовження після відродження (стартує з середини рівня)
+        attempts = [e for e in attempts if video.common_numbers(text, e.text) >= MIN_COMMON_NUMBERS] or attempts
+        longest = max(e.duration for e in attempts)
+        attempts = [e for e in attempts if e.duration >= longest - FULL_RUN_SLACK]
         pick = max(enumerate(attempts),
                    key=lambda ie: (ie[1].state == state, sum(a == b for a, b in zip(ie[1].state, state)), -ie[0]))[1]
         return Match(pick.path, pick.name, best, margin, video.common_numbers(text, top.text),

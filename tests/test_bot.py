@@ -472,11 +472,13 @@ class LibraryPreferenceTest(unittest.TestCase):
         from bot.library import RouteLibrary
         d = Path(tempfile.mkdtemp())
         (d / "cards").mkdir()
-        for name, text, state, uploaded in routes:
+        for name, text, state, uploaded, *dur in routes:
             cv2.imwrite(str(d / "cards" / f"{name}.jpg"), np.zeros((10, 30, 3), np.uint8))
             data = {"level": name, "card": f"cards/{name}.jpg", "card_text": text, "card_state": state}
             if uploaded:
                 data["uploaded"] = uploaded
+            if dur:
+                data["run"] = [10.0, 10.0 + dur[0]]
             (d / f"{name}.json").write_text(json.dumps(data))
         return RouteLibrary(d)
 
@@ -497,6 +499,12 @@ class LibraryPreferenceTest(unittest.TestCase):
         lib = self._lib([("zero_1", text, [0, 0, 0], ""),
                          ("new_1", "collect120coinsscore9500stompon13buriedcaches", [0, 0, 0], "20261002")])
         self.assertEqual(self._match(lib, text).name, "zero_1")
+
+    def test_prefers_finished_run_over_death(self):
+        text = "collect120coinsscore9000stompon12buriedcaches"
+        lib = self._lib([("new_1", text, [0, 0, 0], "20261002", 14.0),    # смерть на 14-й секунді
+                         ("new_2", text, [1, 1, 1], "20261002", 52.0)])   # дійшов до фінішу
+        self.assertEqual(self._match(lib, text).name, "new_2")
 
 
 if __name__ == "__main__":

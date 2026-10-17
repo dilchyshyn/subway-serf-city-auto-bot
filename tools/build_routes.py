@@ -28,6 +28,7 @@ import cv2
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
+START_SETTLE = 0.6  # с від початку забігу, коли стрибки й пірнання з відео не беремо
 sys.path.insert(0, str(ROOT))
 from bot import load_config, route, video  # noqa: E402
 
@@ -250,8 +251,9 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None, uploade
         sel_b = (b_times >= t0) & (b_times <= t1)
         bounces = [t - t0 for t in video.bounce_times(list(b_times[sel_b]), list(b_ratios[sel_b]))]
         gestures = apply_bounces(gestures, bounces, cfg)
-        # на самому старті персонаж «застрибує» в забіг — це анімація, а не стрибок гравця
-        gestures = [g for g in gestures if g.t > 0.05]
+        # на старті камера наїжджає на персонажа: рамка зсувається вгору й так лишається —
+        # це не стрибок гравця (у ~75 маршрутах був хибний стрибок у перші 0,5 с)
+        gestures = [g for g in gestures if g.t > START_SETTLE or g.action in ("left", "right")]
 
         name = f"{slug(title)}_{k + 1}"
         card, card_text = None, None
