@@ -20,6 +20,14 @@
 рамки персонажа, тож після перетренування `models/player.pt` його треба
 видалити.
 
+Тур переробили ~13.06.2026, відео Zero Mode старші. Новіші проходження
+горизонтальні: там PLAY тиснуть на головному екрані без картки рівня, тому
+завдання беруться з екрана результатів після забігу (`video.tiles_text`,
+кадр 1080p докачується по секунді в `rec/videos/hires/`). yt-dlp без deno
+YouTube обмежує до ~13 КБ/с: deno стоїть у `.venv` (`pip install deno`),
+запускати з `PATH=$PWD/.venv/bin:$PATH`. Нові маршрути спершу в
+`routes_new/` (не в git), після перевірки — у `routes/`.
+
 Залежності: `.venv/bin/pip install -r requirements.txt` (torch для CPU:
 `--index-url https://download.pytorch.org/whl/cpu`). Системно потрібен
 лише `adb` (`android-tools`).
