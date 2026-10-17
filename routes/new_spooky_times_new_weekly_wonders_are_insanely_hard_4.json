@@ -1,0 +1,97 @@
+{
+ "level": "new_spooky_times_new_weekly_wonders_are_insanely_hard_4",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=OK1aDrtCQ2k",
+ "title": "[NEW] 🔥 Subway Surfers City : Spooky Times - New Weekly Wonders Are INSANELY HARD! 🎃",
+ "run": [
+  210.23,
+  252.77
+ ],
+ "dropped_lane_events": [
+  8.5,
+  12.63
+ ],
+ "bounces": [],
+ "player_frames": 120,
+ "card_text": "collectl6ocoinsscorg13700hanztimesmpnomore",
+ "card_state": [
+  1,
+  1,
+  1
+ ],
+ "card": "cards/new_spooky_times_new_weekly_wonders_are_insanely_hard_4.jpg",
+ "gestures": [
+  {
+   "t": 3.967,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.233,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 9.217,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.617,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 16.267,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 17.467,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 26.817,
+   "action": "jump",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 31.4,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  }
+ ]
+}

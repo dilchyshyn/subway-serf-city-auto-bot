@@ -1,0 +1,64 @@
+{
+ "level": "phantom_park_all_levels_1_20_complete_walkthrough_8",
+ "start": "hud",
+ "source": "https://www.youtube.com/watch?v=dh0STOdw6oI",
+ "title": "Subway surfers city PHANTOM PARK All levels 1-20 Complete walkthrough",
+ "run": [
+  584.2,
+  591.28
+ ],
+ "dropped_lane_events": [
+  3.96
+ ],
+ "bounces": [
+  0.04,
+  1.4
+ ],
+ "player_frames": 19,
+ "card_text": "stomponl0score35000jumpnomoreburiedcachesthan2times",
+ "card_state": [
+  0,
+  0,
+  0
+ ],
+ "card": "cards/phantom_park_all_levels_1_20_complete_walkthrough_8.jpg",
+ "crew": "crew/phantom_park_all_levels_1_20_complete_walkthrough_8.jpg",
+ "gestures": [
+  {
+   "t": 0.0,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 1.28,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  },
+  {
+   "t": 3.14,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 6.5,
+   "action": "roll",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.5,
+   "y2": 0.85,
+   "duration_ms": 40
+  }
+ ]
+}
