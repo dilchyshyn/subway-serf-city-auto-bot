@@ -54,10 +54,58 @@ def download(url, out_dir):
     existing = list(out_dir.glob(f"{vid}.*"))
     if existing:
         return existing[0]
+    # горизонтальні відео беремо не ширше 854 px: для аналізу досить, а трафіку вдвічі менше
     subprocess.run([sys.executable, "-m", "yt_dlp", "-q", "--no-warnings", "-f",
-                    "bv*[height<=720][ext=mp4]/bv*[height<=720]", "-o", str(out_dir / "%(id)s.%(ext)s"), url],
+                    "bv*[height<=720][width<=900][ext=mp4]/bv*[height<=720][width<=900]/bv*[height<=720]", "-o", str(out_dir / "%(id)s.%(ext)s"), url],
                    check=True)
     return next(out_dir.glob(f"{vid}.*"))
+
+
+def video_title(url):
+    try:
+        return subprocess.run([sys.executable, "-m", "yt_dlp", "--no-warnings", "--skip-download", "--print",
+                               "%(title)s", url], capture_output=True, text=True, check=True).stdout.strip() or url
+    except subprocess.CalledProcessError:
+        return url
+
+
+def hires_frame(url, t, videos_dir):
+    """Кадр у 1080p на момент t: дрібний текст завдань у 480p читається з
+    помилками, тож для кожного екрана результатів докачуємо лише секунду відео."""
+    vid = url.rsplit("=", 1)[-1]
+    cache = videos_dir / "hires" / f"{vid}_{t:.1f}.png"
+    if cache.exists():
+        return cv2.imread(str(cache))
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    clip = cache.with_suffix(".mp4")
+    try:
+        subprocess.run([sys.executable, "-m", "yt_dlp", "-q", "--no-warnings", "-f",
+                        "bv*[height<=1080][ext=mp4]/bv*[height<=1080]", "--download-sections",
+                        f"*{t:.2f}-{t + 0.5:.2f}", "-o", str(clip), url], check=True, timeout=300)
+        img = None
+        with av.open(str(clip)) as c:
+            for f in c.decode(video=0):  # кліп починається з ключового кадру до t — беремо останній
+                img = f.to_ndarray(format="bgr24")
+    except (subprocess.SubprocessError, OSError, av.FFmpegError):
+        return None
+    finally:
+        clip.unlink(missing_ok=True)
+    if img is not None:
+        cv2.imwrite(str(cache), img)
+    return img
+
+
+def player_box(detector, img):
+    """Рамка персонажа (частки кадру). У горизонтальному кадрі шукаємо лише в
+    центральній смузі: персонаж завжди біля центру, а краї кадру дають хибні
+    рамки. x нормуємо на ширину смуги, y — на висоту кадру, як у вертикальному."""
+    h, w = img.shape[:2]
+    x0, x1 = 0, w
+    if w > h:
+        x0, x1 = int(w / 2 - 0.3 * h), int(w / 2 + 0.3 * h)
+    cw = x1 - x0
+    return route.merge_boxes([(d.conf, (d.x1 / cw, d.y1 / h, d.x2 / cw, d.y2 / h))
+                              for d in detector.detect(img[:, x0:x1]) if d.cls == "player"])
 
 
 def analyse(path, detector, det_every):
@@ -83,8 +131,7 @@ def analyse(path, detector, det_every):
                     shift = video.profile_shift(prev_profile, profile)
                 prev_profile = profile
                 if i % det_every == 0:
-                    box = route.merge_boxes([(d.conf, (d.x1 / w, d.y1 / h, d.x2 / w, d.y2 / h))
-                                             for d in detector.detect(img) if d.cls == "player"])
+                    box = player_box(detector, img)
             else:
                 prev_profile = None
                 play = video.find_play_button(img) if not cards or frame.time - cards[-1][0] > 2 else None
@@ -136,11 +183,15 @@ def apply_bounces(gestures, bounces, cfg, lead=0.12):
 
 
 def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
+    videos_dir = Path(path).parent
     times, hud, shifts, boxes, cards = analyse_cached(path, detector, det_every)
     b_times, b_ratios = bounces_cached(path)
     runs = video.segment_runs(times, hud)
     with av.open(str(path)) as c:
-        width = c.streams.video[0].width
+        width, height = c.streams.video[0].width, c.streams.video[0].height
+    landscape = width > height
+    # зсуви рейок рахуються в масштабі video.ANALYSIS_SIDE по коротшій стороні
+    width = video.ANALYSIS_SIDE
     results = []
     for k, (t0, t1) in enumerate(runs):
         sel = (times >= t0) & (times <= t1)
@@ -159,12 +210,19 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
 
         name = f"{slug(title)}_{k + 1}"
         card, card_text = None, None
-        for c in reversed(cards):  # остання справжня картка рівня перед забігом
-            if c[0] >= t0:
-                continue
-            if t0 - c[0] > 90:
-                break
-            text = video.card_text(video._band(c[1], c[2], video.OBJECTIVES_DY))
+        # вертикальне відео: остання справжня картка рівня перед забігом;
+        # горизонтальне: перший екран результатів після забігу (там ті самі завдання)
+        candidates = ([c for c in cards if t1 < c[0] <= t1 + 30] if landscape else
+                      [c for c in reversed(cards) if t0 - 90 <= c[0] < t0])
+        for c in candidates:
+            if landscape:
+                hi = hires_frame(source, c[0], videos_dir) if source and source.startswith("http") else None
+                play = video.find_play_button(hi) if hi is not None else None
+                if play is not None:
+                    c = (c[0], hi, play)
+                text = video.tiles_text(video.objectives_band(c[1], c[2]))
+            else:
+                text = video.card_text(video.objectives_band(c[1], c[2]))
             if video.is_level_card_text(text):  # екран нагород теж має жовту кнопку
                 card, card_text = c, text
                 break
@@ -176,14 +234,16 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None):
             _, img, play = card
             (out_dir / "cards").mkdir(parents=True, exist_ok=True)
             (out_dir / "crew").mkdir(parents=True, exist_ok=True)
-            band = video._band(img, play, video.OBJECTIVES_DY)
+            band = video.objectives_band(img, play)
             cv2.imwrite(str(out_dir / "cards" / f"{name}.jpg"), band, [cv2.IMWRITE_JPEG_QUALITY, 85])
             meta["card_text"] = card_text
             meta["card_state"] = list(video.card_state(band))
-            cv2.imwrite(str(out_dir / "crew" / f"{name}.jpg"), video.crew_crop(img, play), [cv2.IMWRITE_JPEG_QUALITY, 85])
             # для впізнавання рівня потрібен лише блок завдань; повні кадри в репозиторій не кладемо
             meta["card"] = f"cards/{name}.jpg"
-            meta["crew"] = f"crew/{name}.jpg"
+            if not landscape:  # у горизонтальному режимі FEATURED CREW перед забігом не показують
+                cv2.imwrite(str(out_dir / "crew" / f"{name}.jpg"), video.crew_crop(img, play),
+                            [cv2.IMWRITE_JPEG_QUALITY, 85])
+                meta["crew"] = f"crew/{name}.jpg"
         route.save(out_dir / f"{name}.json", name, gestures, start="hud", rebase=False, meta=meta)
         results.append((name, len(gestures), t1 - t0, len(dropped), card is not None))
     return results
@@ -204,7 +264,7 @@ def main():
     v = cfg["vision"]
     detector = YoloDetector(args.model or str(ROOT / "models" / "player.pt"), v["conf"], cfg["video"]["imgsz"])
 
-    items = [(s, Path(s).stem if not s.startswith("http") else s) for s in args.sources]
+    items = [(s, Path(s).stem if not s.startswith("http") else video_title(s)) for s in args.sources]
     if args.channel:
         items += list_channel(args.channel)
     out = Path(args.out)

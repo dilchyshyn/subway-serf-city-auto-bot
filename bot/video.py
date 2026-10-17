@@ -21,13 +21,14 @@ RAIL_BAND = (0.80, 0.97)
 def hud_visible(frame):
     """Чи видно кнопку паузи: жовтий майже квадратний блок з темними смужками всередині."""
     h, w = frame.shape[:2]
+    side = min(h, w)  # розмір кнопки задається коротшою стороною: однаково у вертикальному й горизонтальному режимі
     roi = frame[:int(PAUSE_SEARCH[1] * h), :int(PAUSE_SEARCH[0] * w)]
     hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
     yellow = cv2.inRange(hsv, (18, 140, 170), (35, 255, 255))
     n, labels, stats, _ = cv2.connectedComponentsWithStats(yellow)
     for i in range(1, n):
         x, y, bw, bh, area = stats[i]
-        if not 0.06 * w <= bw <= 0.16 * w or not 0.6 <= bw / max(bh, 1) <= 1.6:
+        if not 0.045 * side <= bw <= 0.16 * side or not 0.6 <= bw / max(bh, 1) <= 1.6:
             continue
         if area < 0.35 * bw * bh:
             continue
@@ -59,7 +60,25 @@ def segment_runs(times, flags, min_len=5.0, max_gap=4.0):
     return runs
 
 
+# Аналіз рейок і пікселні пороги (зсув за кадр тощо) підібрані під коротшу
+# сторону 288 px (вертикальні відео Zero Mode); інші кадри зводимо до цього масштабу.
+ANALYSIS_SIDE = 288
+
+
+def analysis_scale(frame):
+    h, w = frame.shape[:2]
+    if min(h, w) == ANALYSIS_SIDE:
+        return frame
+    k = ANALYSIS_SIDE / min(h, w)
+    return cv2.resize(frame, (round(w * k), round(h * k)), interpolation=cv2.INTER_AREA)
+
+
+def is_landscape(frame):
+    return frame.shape[1] > frame.shape[0]
+
+
 def rail_profile(frame):
+    frame = analysis_scale(frame)
     h = frame.shape[0]
     band = cv2.cvtColor(frame[int(RAIL_BAND[0] * h):int(RAIL_BAND[1] * h)], cv2.COLOR_BGR2GRAY)
     gx = np.abs(cv2.Sobel(band.astype(np.float32), cv2.CV_32F, 1, 0, ksize=3)).mean(axis=0)
@@ -152,9 +171,20 @@ OBJECTIVES_DY = (-0.46, -0.22)  # із запасом: макет картки �
 CREW_DY = (-0.17, -0.05)
 
 
+# Горизонтальний режим (оновлений тур, відео інших каналів): картки перед забігом
+# немає — PLAY тиснуть на головному екрані. Ті самі три завдання видно на екрані
+# результатів після забігу (синій фон, жовта кнопка CONTINUE, плитки завдань у ряд).
+LANDSCAPE_OBJECTIVES_DY = (-0.41, -0.20)
+LANDSCAPE_OBJECTIVES_X = (0.36, 0.64)
+
+
 def find_play_button(frame):
-    """Рамка жовтої кнопки PLAY (x1, y1, x2, y2 у частках кадру) або None."""
+    """Рамка жовтої кнопки PLAY (x1, y1, x2, y2 у частках кадру) або None.
+
+    У горизонтальному кадрі — кнопка CONTINUE екрана результатів (див. вище)."""
     h, w = frame.shape[:2]
+    if w > h:
+        return _find_results_button(frame)
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, (15, 150, 190), (32, 255, 255))
     mask[:int(0.5 * h)] = 0
@@ -171,6 +201,28 @@ def find_play_button(frame):
     return x / w, y / h, (x + bw) / w, (y + bh) / h
 
 
+def _find_results_button(frame):
+    h, w = frame.shape[:2]
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    if cv2.inRange(hsv[int(0.45 * h):int(0.75 * h)], (95, 120, 120), (115, 255, 255)).mean() / 255 < 0.5:
+        return None   # не синій фон екрана результатів
+    mask = cv2.inRange(hsv, (15, 150, 190), (32, 255, 255))
+    mask[:int(0.6 * h)] = 0
+    n, _, stats, _ = cv2.connectedComponentsWithStats(mask)
+    for i in range(1, n):
+        x, y, bw, bh, area = stats[i]
+        if 0.1 * w <= bw <= 0.3 * w and 0.04 * h <= bh <= 0.1 * h and area >= 0.6 * bw * bh:
+            return x / w, y / h, (x + bw) / w, (y + bh) / h
+    return None
+
+
+def objectives_band(frame, play):
+    """Блок трьох завдань рівня відносно знайденої кнопки (вертикальний чи горизонтальний кадр)."""
+    if is_landscape(frame):
+        return _band(frame, play, LANDSCAPE_OBJECTIVES_DY, LANDSCAPE_OBJECTIVES_X)
+    return _band(frame, play, OBJECTIVES_DY)
+
+
 def _band(frame, play, dy, x_range=(0.06, 0.94)):
     h, w = frame.shape[:2]
     cy = (play[1] + play[3]) / 2
@@ -181,7 +233,7 @@ def _band(frame, play, dy, x_range=(0.06, 0.94)):
 def card_fingerprint(frame, play):
     """Нормований сірий «відбиток» блоку завдань: однаковий для того самого рівня
     незалежно від роздільної здатності телефону."""
-    return band_fingerprint(_band(frame, play, OBJECTIVES_DY))
+    return band_fingerprint(objectives_band(frame, play))
 
 
 def band_fingerprint(band):
@@ -209,12 +261,35 @@ _ocr = None
 _CONFUSABLE = str.maketrans({"o": "0", "l": "1", "i": "1", "s": "5", "b": "8", "z": "2", "g": "9"})
 
 
-def card_text(band):
-    """Текст завдань з вирізки картки (без лічильників «0/8»), нормалізований."""
+def _get_ocr():
     global _ocr
     if _ocr is None:
         from rapidocr_onnxruntime import RapidOCR  # потрібен лише для режиму туру
         _ocr = RapidOCR()
+    return _ocr
+
+
+def tiles_text(band):
+    """Текст завдань горизонтального екрана результатів: три плитки в ряд,
+    кожну читаємо окремо (інакше OCR змішує колонки), лише нижню частину з
+    підписом — без чисел на значках і лічильників."""
+    import re
+    h, w = band.shape[:2]
+    words = []
+    for k in range(3):
+        tile = band[int(0.6 * h):, int(k * w / 3):int((k + 1) * w / 3)]
+        scale = max(1.0, 360 / max(tile.shape[1], 1))
+        tile = cv2.resize(tile, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+        result, _ = _get_ocr()(tile)
+        for r in sorted(result or [], key=lambda r: (r[0][0][1] // 40, r[0][0][0])):
+            words.append(re.sub(r"(?<![A-Za-z])[Il|](?![A-Za-z])", "1", r[1]))  # окреме «I» у шрифті гри — це 1
+    keep = [w.lower() for w in words if "/" not in w and not any(j in _norm_word(w) for j in _JUNK)]
+    return "".join(ch for w in keep for ch in w if ch.isalnum())
+
+
+def card_text(band):
+    """Текст завдань з вирізки картки (без лічильників «0/8»), нормалізований."""
+    _ocr = _get_ocr()
     scale = max(1.0, 900 / band.shape[1])  # дрібний текст з відео збільшуємо
     img = cv2.resize(band, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
     result, _ = _ocr(img)

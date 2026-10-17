@@ -91,7 +91,7 @@ class RouteLibrary:
         play = video.find_play_button(frame)
         if play is None or not self.entries:
             return None, play
-        return self.match_band(video._band(frame, play, video.OBJECTIVES_DY)), play
+        return self.match_band(video.objectives_band(frame, play)), play
 
     @staticmethod
     def confident(m, cfg):
