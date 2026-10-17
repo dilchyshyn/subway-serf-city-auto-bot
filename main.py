@@ -52,6 +52,8 @@ def parse_args():
                    help="зсув маршруту в секундах, якщо рівень вантажиться довше/коротше, ніж під час запису")
     p.add_argument("--route-guard", action="store_true",
                    help="між жестами маршруту стрибати/пірнати перед несподіваними перешкодами")
+    p.add_argument("--no-board", action="store_true",
+                   help="не вмикати ховерборд на маршрутах з відео (тап по капсулі дошки)")
     p.add_argument("--diag", action="store_true",
                    help="записати кадри й журнал дій у rec/diag/<час>/ для розбору помилок")
     p.add_argument("--dry-run", action="store_true", help="не надсилати жести на телефон")
@@ -170,6 +172,8 @@ def main():
             input("Натисни «Грати» на телефоні, потім Enter тут у момент, коли персонаж почне бігти...")
         else:
             print("Екран рівня з кнопкою «Грати» має бути відкритий, бот натисне її сам.")
+        if start_mode == "hud" and cfg["tour"]["board"]["enabled"] and not args.no_board:
+            gestures = routes.with_board_taps(gestures, cfg["tour"]["board"])
         player = routes.RoutePlayer(gestures, time.monotonic(), args.route_offset,
                                     first_immediate=start_mode == "tap")
 

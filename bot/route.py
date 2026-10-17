@@ -165,6 +165,27 @@ def _median3(values):
     return np.median(np.stack([padded[:-2], padded[1:-1], padded[2:]]), axis=0)
 
 
+def with_board_taps(gestures, board_cfg):
+    """Тапи по капсулі ховерборда (праворуч під лічильником монет) на старті й
+    далі з інтервалом: гравці у відео зазвичай вмикають дошку одразу, а вона
+    рятує від одного зіткнення й міняє стрибки — без неї маршрут розходиться.
+    Якщо дошки немає, тап у порожнє місце нічого не робить. Тапи не ставимо
+    ближче ніж gap до свайпів, щоб не зірвати жест."""
+    if not gestures:
+        return gestures
+    x, y = board_cfg["tap"]
+    gap, end = board_cfg["gap"], gestures[-1].t
+    swipes = [g.t for g in gestures if g.action != "tap"]
+    taps, t = [], board_cfg["start"]
+    while t <= end:
+        shifted = t
+        while any(abs(shifted - s) < gap for s in swipes):
+            shifted += 0.1
+        taps.append(Gesture(round(shifted, 3), "tap", x, y, x, y, 40))
+        t += board_cfg["every"]
+    return sorted(gestures + taps, key=lambda g: g.t)
+
+
 def _swipe(action, t, swipe_cfg):
     dx, dy = {"left": (-1, 0), "right": (1, 0), "jump": (0, -1), "roll": (0, 1)}[action]
     ox, oy = swipe_cfg["origin"]

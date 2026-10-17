@@ -507,5 +507,15 @@ class LibraryPreferenceTest(unittest.TestCase):
         self.assertEqual(self._match(lib, text).name, "new_2")
 
 
+class BoardTapTest(unittest.TestCase):
+    def test_taps_avoid_swipes(self):
+        cfg = load_config()["swipe"]
+        board = {"tap": [0.91, 0.21], "start": 0.8, "every": 12.0, "gap": 0.3}
+        g = [route._swipe("jump", 0.9, cfg), route._swipe("left", 20.0, cfg), route._swipe("roll", 26.0, cfg)]
+        taps = [x.t for x in route.with_board_taps(g, board) if x.action == "tap"]
+        self.assertEqual(len(taps), 3)                       # 0,8 → зсув за стрибок; 12,8; 24,8
+        self.assertTrue(all(min(abs(t - s.t) for s in g) >= 0.3 - 1e-6 for t in taps))
+
+
 if __name__ == "__main__":
     unittest.main()
