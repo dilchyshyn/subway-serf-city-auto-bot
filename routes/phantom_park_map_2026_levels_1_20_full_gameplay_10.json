@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=n77AuOyaMhY",
  "title": "Subway Surfers City - Phantom Park Map 2026 | Levels 1 - 20 Full Gameplay",
+ "uploaded": "20261003",
  "run": [
   730.4,
   768.73
@@ -132,6 +133,5 @@
    "y2": 0.35,
    "duration_ms": 40
   }
- ],
- "uploaded": "20261003"
+ ]
 }

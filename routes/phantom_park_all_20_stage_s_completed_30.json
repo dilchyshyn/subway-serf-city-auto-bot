@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=-qAYH6-xoyY",
  "title": "Subway Surfers City Phantom Park All 20 Stage's Completed.",
+ "uploaded": "20261003",
  "run": [
   1928.16,
   1983.12
@@ -22,24 +23,6 @@
  ],
  "card": "cards/phantom_park_all_20_stage_s_completed_30.jpg",
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "right",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.75,
-   "y2": 0.6,
-   "duration_ms": 40
-  },
-  {
-   "t": 0.0,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 2.152,
    "action": "jump",
@@ -310,6 +293,5 @@
    "y2": 0.6,
    "duration_ms": 40
   }
- ],
- "uploaded": "20261003"
+ ]
 }

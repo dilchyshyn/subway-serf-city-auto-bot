@@ -3,11 +3,16 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=7mr1T6QAwBk",
  "title": "🔥 PHANTOM PARK FULL CITY TOUR! 👻 20 LEVELS + ALL HALLOWEEN OUTFITS | Subway Surfers City",
+ "uploaded": "20261001",
  "run": [
   1177.3,
   1214.07
  ],
- "dropped_lane_events": [],
+ "dropped_lane_events": [
+  5.7,
+  32.13,
+  33.6
+ ],
  "bounces": [
   24.7
  ],
@@ -39,6 +44,15 @@
    "duration_ms": 40
   },
   {
+   "t": 4.267,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 5.417,
    "action": "jump",
    "x1": 0.5,
@@ -57,12 +71,30 @@
    "duration_ms": 40
   },
   {
+   "t": 10.467,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 10.55,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 11.667,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
    "duration_ms": 40
   },
   {
@@ -156,6 +188,42 @@
    "duration_ms": 40
   },
   {
+   "t": 27.467,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 30.433,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 32.567,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 32.667,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 33.283,
    "action": "jump",
    "x1": 0.5,
@@ -172,7 +240,15 @@
    "x2": 0.5,
    "y2": 0.35,
    "duration_ms": 40
+  },
+  {
+   "t": 34.8,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
   }
- ],
- "uploaded": "20261001"
+ ]
 }

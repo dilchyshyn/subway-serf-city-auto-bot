@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=-qAYH6-xoyY",
  "title": "Subway Surfers City Phantom Park All 20 Stage's Completed.",
+ "uploaded": "20261003",
  "run": [
   2320.05,
   2337.94
@@ -13,15 +14,6 @@
  "bounces": [],
  "player_frames": 66,
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "jump",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.35,
-   "duration_ms": 40
-  },
   {
    "t": 5.656,
    "action": "jump",
@@ -130,6 +122,5 @@
    "y2": 0.35,
    "duration_ms": 40
   }
- ],
- "uploaded": "20261003"
+ ]
 }

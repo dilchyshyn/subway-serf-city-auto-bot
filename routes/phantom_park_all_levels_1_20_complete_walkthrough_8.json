@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=dh0STOdw6oI",
  "title": "Subway surfers city PHANTOM PARK All levels 1-20 Complete walkthrough",
+ "uploaded": "20261002",
  "run": [
   584.2,
   591.28
@@ -24,15 +25,6 @@
  "card": "cards/phantom_park_all_levels_1_20_complete_walkthrough_8.jpg",
  "crew": "crew/phantom_park_all_levels_1_20_complete_walkthrough_8.jpg",
  "gestures": [
-  {
-   "t": 0.0,
-   "action": "roll",
-   "x1": 0.5,
-   "y1": 0.6,
-   "x2": 0.5,
-   "y2": 0.85,
-   "duration_ms": 40
-  },
   {
    "t": 1.28,
    "action": "roll",
@@ -60,6 +52,5 @@
    "y2": 0.85,
    "duration_ms": 40
   }
- ],
- "uploaded": "20261002"
+ ]
 }

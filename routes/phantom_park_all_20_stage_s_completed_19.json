@@ -3,6 +3,7 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=-qAYH6-xoyY",
  "title": "Subway Surfers City Phantom Park All 20 Stage's Completed.",
+ "uploaded": "20261003",
  "run": [
   1313.85,
   1357.82
@@ -13,6 +14,13 @@
  ],
  "bounces": [],
  "player_frames": 204,
+ "card_text": "bouncyfarstompon20k2818kscore28800coilecf13coinsacks",
+ "card_state": [
+  0,
+  0,
+  1
+ ],
+ "card": "cards/phantom_park_all_20_stage_s_completed_19.jpg",
  "gestures": [
   {
    "t": 0.401,
@@ -311,6 +319,5 @@
    "y2": 0.6,
    "duration_ms": 40
   }
- ],
- "uploaded": "20261003"
+ ]
 }

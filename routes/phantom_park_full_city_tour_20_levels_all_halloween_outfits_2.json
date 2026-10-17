@@ -3,11 +3,14 @@
  "start": "hud",
  "source": "https://www.youtube.com/watch?v=7mr1T6QAwBk",
  "title": "🔥 PHANTOM PARK FULL CITY TOUR! 👻 20 LEVELS + ALL HALLOWEEN OUTFITS | Subway Surfers City",
+ "uploaded": "20261001",
  "run": [
   97.4,
   145.13
  ],
- "dropped_lane_events": [],
+ "dropped_lane_events": [
+  6.6
+ ],
  "bounces": [],
  "player_frames": 295,
  "card_text": "collect3bubblegumsaoro33800stomponl0riedcaches",
@@ -19,12 +22,39 @@
  "card": "cards/phantom_park_full_city_tour_20_levels_all_halloween_outfits_2.jpg",
  "gestures": [
   {
+   "t": 2.267,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 2.733,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 4.383,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 7.167,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
    "duration_ms": 40
   },
   {
@@ -64,12 +94,30 @@
    "duration_ms": 40
   },
   {
+   "t": 16.767,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 18.65,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 19.133,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
    "duration_ms": 40
   },
   {
@@ -109,6 +157,15 @@
    "duration_ms": 40
   },
   {
+   "t": 22.367,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 23.45,
    "action": "jump",
    "x1": 0.5,
@@ -124,6 +181,15 @@
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 24.533,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
    "duration_ms": 40
   },
   {
@@ -172,12 +238,48 @@
    "duration_ms": 40
   },
   {
+   "t": 36.533,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
    "t": 36.583,
    "action": "jump",
    "x1": 0.5,
    "y1": 0.6,
    "x2": 0.5,
    "y2": 0.35,
+   "duration_ms": 40
+  },
+  {
+   "t": 38.467,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 39.533,
+   "action": "right",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.75,
+   "y2": 0.6,
+   "duration_ms": 40
+  },
+  {
+   "t": 39.933,
+   "action": "left",
+   "x1": 0.5,
+   "y1": 0.6,
+   "x2": 0.25,
+   "y2": 0.6,
    "duration_ms": 40
   },
   {
@@ -198,6 +300,5 @@
    "y2": 0.35,
    "duration_ms": 40
   }
- ],
- "uploaded": "20261001"
+ ]
 }
