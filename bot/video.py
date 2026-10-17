@@ -16,6 +16,8 @@ import numpy as np
 # Відступ зверху буває різним (статус-бар, обрізка запису), тож зона з запасом.
 PAUSE_SEARCH = (0.15, 0.13)
 RAIL_BAND = (0.80, 0.97)
+# запасна смуга рейок: у деяких відео низ кадру закриває банер каналу
+RAIL_BAND_HIGH = (0.60, 0.78)
 
 
 def hud_visible(frame):
@@ -77,10 +79,10 @@ def is_landscape(frame):
     return frame.shape[1] > frame.shape[0]
 
 
-def rail_profile(frame):
+def rail_profile(frame, band_y=RAIL_BAND):
     frame = analysis_scale(frame)
     h = frame.shape[0]
-    band = cv2.cvtColor(frame[int(RAIL_BAND[0] * h):int(RAIL_BAND[1] * h)], cv2.COLOR_BGR2GRAY)
+    band = cv2.cvtColor(frame[int(band_y[0] * h):int(band_y[1] * h)], cv2.COLOR_BGR2GRAY)
     gx = np.abs(cv2.Sobel(band.astype(np.float32), cv2.CV_32F, 1, 0, ksize=3)).mean(axis=0)
     gx -= gx.mean()
     return gx / (np.linalg.norm(gx) + 1e-6)

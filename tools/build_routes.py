@@ -159,6 +159,41 @@ def analyse_cached(path, detector, det_every):
     return times, hud, shifts, boxes, cards
 
 
+def high_band_shifts_cached(path, times, hud):
+    """Зсуви рейок у запасній смузі (вище) для відео, де низ кадру закритий банером."""
+    cache = Path(path).with_suffix(".rails_high.npz")
+    if cache.exists():
+        return np.load(cache)["shifts"]
+    on = dict(zip(np.round(times, 3), hud))
+    shifts, prev = [], None
+    with av.open(str(path)) as container:
+        for frame in container.decode(video=0):
+            if frame.time is None:
+                continue
+            shift = 0
+            if on.get(round(frame.time, 3), False):
+                profile = video.rail_profile(frame.to_ndarray(format="bgr24"), video.RAIL_BAND_HIGH)
+                if prev is not None:
+                    shift = video.profile_shift(prev, profile)
+                prev = profile
+            else:
+                prev = None
+            shifts.append(shift)
+    shifts = np.array(shifts[:len(times)], float)
+    np.savez_compressed(cache, shifts=shifts)
+    return shifts
+
+
+def lane_motion(times, shifts, runs, width):
+    """Скільки сплесків руху на розмір смуги припадає на хвилину забігів."""
+    n, dur = 0, 0.0
+    for t0, t1 in runs:
+        sel = (times >= t0) & (times <= t1)
+        n += sum(abs(s) >= 0.25 * width for _, _, s in video.motion_bursts(list(times[sel]), shifts[sel]))
+        dur += t1 - t0
+    return n / max(dur / 60, 1e-6)
+
+
 def bounces_cached(path):
     """Рожевість кадру для пошуку відскоків на Bubblegum; окремий кеш, без детектора."""
     cache = Path(path).with_suffix(".bounce.npz")
@@ -195,6 +230,11 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None, uploade
     landscape = width > height
     # зсуви рейок рахуються в масштабі video.ANALYSIS_SIDE по коротшій стороні
     width = video.ANALYSIS_SIDE
+    if runs and lane_motion(times, shifts, runs, width) < 3:   # гравці міняють смугу кілька разів за хвилину
+        alt = high_band_shifts_cached(path, times, hud)
+        if lane_motion(times, alt, runs, width) > lane_motion(times, shifts, runs, width):
+            print("    низ кадру без руху рейок (банер?) — беру смугу вище")
+            shifts = alt
     results = []
     for k, (t0, t1) in enumerate(runs):
         sel = (times >= t0) & (times <= t1)
@@ -210,6 +250,8 @@ def build(path, title, out_dir, detector, cfg, det_every=2, source=None, uploade
         sel_b = (b_times >= t0) & (b_times <= t1)
         bounces = [t - t0 for t in video.bounce_times(list(b_times[sel_b]), list(b_ratios[sel_b]))]
         gestures = apply_bounces(gestures, bounces, cfg)
+        # на самому старті персонаж «застрибує» в забіг — це анімація, а не стрибок гравця
+        gestures = [g for g in gestures if g.t > 0.05]
 
         name = f"{slug(title)}_{k + 1}"
         card, card_text = None, None
